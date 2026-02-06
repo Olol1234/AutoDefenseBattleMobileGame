@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Net;
 
 public class LaserTurret : MonoBehaviour
 {
@@ -58,12 +59,28 @@ public class LaserTurret : MonoBehaviour
             timer += Time.deltaTime;
 
             Vector2 start = firePoint.position;
+
+            // Implement raycast here
+            RaycastHit2D[] hits = Physics2D.RaycastAll(start, dir, maxLaserLength);
+
             Vector2 end = start + dir * maxLaserLength;
+
+            if (hits.Length > 0)
+            {
+                System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+                end = hits[hits.Length -1].point;
+                foreach (var hit in hits)
+                {
+                    HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
+                    if (enemy != null)
+                    {
+                        enemy.TakeDamage(laserDPS * Time.deltaTime);
+                    }
+                }
+            }
 
             lineRenderer.SetPosition(0, start);
             lineRenderer.SetPosition(1, end);
-
-            DamageEnemiesAlongBeam(start, dir);
 
             yield return null;
         }
@@ -78,19 +95,19 @@ public class LaserTurret : MonoBehaviour
         isCooling = false;
     }
 
-    void DamageEnemiesAlongBeam(Vector2 start, Vector2 dir)
-    {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(start, dir, maxLaserLength, enemyLayer);
+    // void DamageEnemiesAlongBeam(Vector2 start, Vector2 dir)
+    // {
+    //     RaycastHit2D[] hits = Physics2D.RaycastAll(start, dir, maxLaserLength, enemyLayer);
 
-        foreach (var hit in hits)
-        {
-            HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(laserDPS * Time.deltaTime);
-            }
-        }
-    }
+    //     foreach (var hit in hits)
+    //     {
+    //         HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
+    //         if (enemy != null)
+    //         {
+    //             enemy.TakeDamage(laserDPS * Time.deltaTime);
+    //         }
+    //     }
+    // }
 
     Transform FindClosestEnemy()
     {
