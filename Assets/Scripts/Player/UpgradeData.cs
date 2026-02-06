@@ -51,6 +51,22 @@ public class UpgradeData
             case UpgradeType.HomingMissileTurretExtraMissile:
                 HomingMissileBrain.Instance.extraMissile += 1;
                 break;
+
+            case UpgradeType.LaserTurret:
+                TurretManager.Instance.SpawnTurret(TurretType.LaserTurret);
+                break;
+            
+            case UpgradeType.LaserTurretCooldown:
+                LaserTurretBrain.Instance.lowerCooldownFactor += 0.1f;
+                break;
+
+            case UpgradeType.LaserTurretDamagePercent:
+                LaserTurretBrain.Instance.damageMultiplier *= 1.2f;
+                break;
+
+            case UpgradeType.LaserTurretDuration:
+                LaserTurretBrain.Instance.extraDuration += 0.5f;
+                break;
         }
     }
 
