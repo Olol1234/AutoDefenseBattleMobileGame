@@ -15,21 +15,6 @@ public class TurretManager : MonoBehaviour
         Instance = this;
     }
 
-    // public bool SpawnTurret()
-    // {
-    //     Transform slot = slotManager.GetNextEmptySlot();
-
-    //     if (slot == null)
-    //     {
-    //         Debug.Log("All turret slots full");
-    //         return false;
-    //     }
-
-    //     Instantiate(turretPrefab, slot.position, slot.rotation, slot);
-    //     activeTurretCount++;
-    //     return true;
-    // }
-
     public bool SpawnTurret(TurretType type)
     {
         var data = turretDatas.Find(t => t.type == type);
