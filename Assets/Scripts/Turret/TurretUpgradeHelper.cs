@@ -15,9 +15,9 @@ public static class TurretUpgradeHelper
                 level = p.homingMissileTurretDamageLevel;
                 break;
 
-            // case TurretType.Laser:
-            //     level = p.laserDamageLevel;
-            //     break;
+            case TurretType.LaserTurret:
+                level = p.laserTurretDamageLevel;
+                break;
         }
 
         return Mathf.RoundToInt(baseCost * Mathf.Pow(1.3f, level));
@@ -34,6 +34,10 @@ public static class TurretUpgradeHelper
         {
             case TurretType.HomingMissileTurret:
                 level = p.homingMissileTurretCooldownLevel;
+                break;
+
+            case TurretType.LaserTurret:
+                level = p.laserTurretCooldownLevel;
                 break;
         }
 
@@ -55,13 +59,13 @@ public static class TurretUpgradeHelper
         {
             case TurretType.HomingMissileTurret:
                 p.homingMissileTurretDamageLevel++;
-                p.homingMissileTurretBaseDamage += 5f;
+                p.homingMissileTurretBaseDamage += 50f;
                 break;
 
-            // case TurretType.Laser:
-            //     p.laserDamageLevel++;
-            //     p.laserTurretBaseDamage += 3f;
-            //     break;
+            case TurretType.LaserTurret:
+                p.laserTurretDamageLevel++;
+                p.laserTurretBaseDPS += 30f;
+                break;
         }
 
         p.SaveToDisk();
@@ -85,6 +89,11 @@ public static class TurretUpgradeHelper
                 p.homingMissileTurretCooldownLevel++;
                 p.homingMissileTurretCooldown *= 0.95f; // 5% faster
                 break;
+
+            case TurretType.LaserTurret:
+                p.laserTurretCooldownLevel++;
+                p.laserTurretCooldown *= 0.95f; // 5% faster
+                break;
         }
 
         p.SaveToDisk();
@@ -98,7 +107,11 @@ public static class TurretUpgradeHelper
         switch (type)
         {
             case TurretType.HomingMissileTurret:
-                return p.homingMissileTurretBaseDamage + 5f;
+                return p.homingMissileTurretBaseDamage + 50f;
+
+            case TurretType.LaserTurret:
+                return p.laserTurretBaseDPS + 30f;
+                
         }
 
         return 0;
@@ -112,6 +125,9 @@ public static class TurretUpgradeHelper
         {
             case TurretType.HomingMissileTurret:
                 return p.homingMissileTurretCooldown * 0.95f;
+
+            case TurretType.LaserTurret:
+                return p.laserTurretCooldown * 0.95f;
         }
 
         return 0;
