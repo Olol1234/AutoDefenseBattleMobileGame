@@ -2,8 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Net;
 
-public class LaserTurret : MonoBehaviour
+public class LaserTurretBrain : MonoBehaviour
 {
+    public static LaserTurretBrain Instance;
+
     [Header("References")]
     public Transform firePoint;
     public LineRenderer lineRenderer;
@@ -18,6 +20,14 @@ public class LaserTurret : MonoBehaviour
     public float range = 14f;
     public LayerMask enemyLayer;
 
+    [Header("Run Stats")]
+    public float damageMultiplier = 1f;
+    public float damageAddition = 0f;
+    public float damagePenalty = 0f;
+    public int extraLaser = 0;
+    public float lowerCooldownFactor = 0f;
+    public float extraDuration = 0f;
+
     private bool isFiring = false;
     private bool isCooling = false;
 
@@ -27,8 +37,55 @@ public class LaserTurret : MonoBehaviour
         StartCoroutine(LaserRoutine());
     }
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    public void InitFromProfile()
+    {
+        var profile = PlayerProfile.Instance;
+
+        laserDPS = profile.laserTurretBaseDPS;
+        laserCooldown = profile.laserTurretCooldown;
+        laserDuration = profile.laserTurretDuration;
+
+        ResetRunStats();
+    }
+
+    public void ResetRunStats()
+    {
+        damageMultiplier = 1f;
+        damageAddition = 0f;
+        damagePenalty = 0f;
+        extraLaser = 0;
+        lowerCooldownFactor = 0f;
+        extraDuration = 0f;
+    }
+
+    public float GetDamage()
+    {
+        float basePlusAdd = laserDPS + damageAddition;
+        float final = basePlusAdd * damageMultiplier;
+        final -= damagePenalty;
+        return Mathf.Max(final, 0f);
+    }
+
+    public float GetDuration()
+    {
+        return laserDuration + extraDuration;
+    }
+
+    public float GetCooldown()
+    {
+        float finalCooldown = laserCooldown - (laserCooldown * lowerCooldownFactor);
+        return finalCooldown;
+    }
+
     IEnumerator LaserRoutine()
     {
+        yield return new WaitForSeconds(2f);
+
         while (true)
         {
             if (!isFiring && !isCooling)
@@ -54,7 +111,8 @@ public class LaserTurret : MonoBehaviour
 
         Vector2 dir = (target.position - firePoint.position).normalized;
 
-        while (timer < laserDuration)
+        // while (timer < laserDuration)
+        while (timer < GetDuration())
         {
             timer += Time.deltaTime;
 
@@ -65,17 +123,13 @@ public class LaserTurret : MonoBehaviour
 
             Vector2 end = start + dir * maxLaserLength;
 
-            if (hits.Length > 0)
+            foreach (var hit in hits)
             {
-                System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-                end = hits[hits.Length -1].point;
-                foreach (var hit in hits)
+                HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
+                if (enemy != null)
                 {
-                    HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
-                    if (enemy != null)
-                    {
-                        enemy.TakeDamage(laserDPS * Time.deltaTime);
-                    }
+                    // enemy.TakeDamage(laserDPS * Time.deltaTime);
+                    enemy.TakeDamage(GetDamage() * Time.deltaTime);
                 }
             }
 
@@ -90,24 +144,11 @@ public class LaserTurret : MonoBehaviour
         isFiring = false;
         isCooling = true;
 
-        yield return new WaitForSeconds(laserCooldown);
+        // yield return new WaitForSeconds(laserCooldown);
+        yield return new WaitForSeconds(GetCooldown());
 
         isCooling = false;
     }
-
-    // void DamageEnemiesAlongBeam(Vector2 start, Vector2 dir)
-    // {
-    //     RaycastHit2D[] hits = Physics2D.RaycastAll(start, dir, maxLaserLength, enemyLayer);
-
-    //     foreach (var hit in hits)
-    //     {
-    //         HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
-    //         if (enemy != null)
-    //         {
-    //             enemy.TakeDamage(laserDPS * Time.deltaTime);
-    //         }
-    //     }
-    // }
 
     Transform FindClosestEnemy()
     {
