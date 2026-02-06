@@ -19,6 +19,15 @@ public class PlayerProfile : MonoBehaviour
     public float homingMissileTurretCooldown;
     public int homingMissileTurretCooldownLevel;
 
+    // Base stats for laser turret
+    public bool laserTurretUnlocked;
+    public float laserTurretBaseDPS;
+    public int laserTurretDamageLevel;
+    public float laserTurretCooldown;
+    public int laserTurretCooldownLevel;
+    public float laserTurretDuration;
+    public int laserTurretDurationLevel;
+
     public bool IsLoaded { get; private set; } = false;
     // Event for UI + systems
     public static System.Action OnProfileLoaded;
@@ -59,6 +68,14 @@ public class PlayerProfile : MonoBehaviour
         homingMissileTurretDamageLevel = data.homingMissileTurretDamageLevel;
         homingMissileTurretCooldown = data.homingMissileTurretCooldown;
         homingMissileTurretCooldownLevel = data.homingMissileTurretCooldownLevel;
+        // LASER TURRET DATA
+        laserTurretUnlocked = data.laserTurretUnlocked;
+        laserTurretBaseDPS = data.laserTurretBaseDPS;
+        laserTurretDamageLevel = data.laserTurretDamageLevel;
+        laserTurretCooldown = data.laserTurretCooldown;
+        laserTurretCooldownLevel = data.laserTurretCooldownLevel;
+        laserTurretDuration = data.laserTurretDuration;
+        laserTurretDurationLevel = data.laserTurretDurationLevel;
 
         IsLoaded = true;
 
@@ -83,6 +100,14 @@ public class PlayerProfile : MonoBehaviour
         data.homingMissileTurretDamageLevel = homingMissileTurretDamageLevel;
         data.homingMissileTurretCooldown = homingMissileTurretCooldown;
         data.homingMissileTurretCooldownLevel = homingMissileTurretCooldownLevel;
+        // LASER TURRET DATA
+        data.laserTurretUnlocked = laserTurretUnlocked;
+        data.laserTurretBaseDPS = laserTurretBaseDPS;
+        data.laserTurretDamageLevel = laserTurretDamageLevel;
+        data.laserTurretCooldown = laserTurretCooldown;
+        data.laserTurretCooldownLevel = laserTurretCooldownLevel;
+        data.laserTurretDuration = laserTurretDuration;
+        data.laserTurretDurationLevel = laserTurretDurationLevel;
 
         SaveManager.Instance.Save();
     }
