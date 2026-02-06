@@ -35,23 +35,31 @@ public class TurretDetailPanel : MonoBehaviour
             cooldownRow.SetActive(true);
 
             turretNameText.text = "Homing Missile Turret";
-            // damageText.text = "Damage: " + profile.homingMissileTurretBaseDamage;
             damageText.text = profile.homingMissileTurretBaseDamage.ToString("F0");
-            // nextDamageText.text = "Next: " + TurretUpgradeHelper.GetNextDamageValue(type);
             nextDamageText.text = TurretUpgradeHelper.GetNextDamageValue(type).ToString("F0");
-            // cooldownText.text = "Cooldown: " + profile.homingMissileTurretCooldown;
-            cooldownText.text = profile.homingMissileTurretCooldown.ToString("F0");
-            // nextCooldownText.text = "Next: " + TurretUpgradeHelper.GetNextCooldownValue(type);
-            nextCooldownText.text = TurretUpgradeHelper.GetNextCooldownValue(type).ToString("F0");
+            cooldownText.text = profile.homingMissileTurretCooldown.ToString("F2");
+            nextCooldownText.text = TurretUpgradeHelper.GetNextCooldownValue(type).ToString("F2");
             int cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
             upgradeDamageCostText.text = "Coin: " + cost;
             int cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
             upgradeCooldownCostText.text = "Coin: " + cooldownCost;
         }
-            // Future turret types can be handled here
 
-        // int cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
-        // upgradeCostText.text = "Cost: " + cost;
+        if (type == TurretType.LaserTurret)
+        {
+            damageRow.SetActive(true);
+            cooldownRow.SetActive(true);
+
+            turretNameText.text = "Laser Turret";
+            damageText.text = profile.laserTurretBaseDPS.ToString("F0");
+            nextDamageText.text = TurretUpgradeHelper.GetNextDamageValue(type).ToString("F0");
+            cooldownText.text = profile.laserTurretCooldown.ToString("F2");
+            nextCooldownText.text = TurretUpgradeHelper.GetNextCooldownValue(type).ToString("F2");
+            int cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
+            upgradeDamageCostText.text = "Coin: " + cost;
+            int cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
+            upgradeCooldownCostText.text = "Coin: " + cooldownCost;
+        }
 
     }
 
