@@ -174,7 +174,10 @@ public class LevelManager : MonoBehaviour
         var profile = PlayerProfile.Instance;
 
         if (profile.highestStageCleared >= 1)
+        {
+            profile.laserTurretUnlocked = true;
             profile.homingMissileTurretUnlocked = true;
+        }
 
     }
 
