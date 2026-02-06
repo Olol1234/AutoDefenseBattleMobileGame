@@ -16,7 +16,12 @@ public class PlayerData
     public float homingMissileTurretCooldown = 5f;
     public int homingMissileTurretCooldownLevel = 1;
 
-    // Future:
-    // public int fortressLevel;
-    // public List<string> unlockedWeapons;
+    // LASER TURRET DATA
+    public bool laserTurretUnlocked = false;
+    public float laserTurretBaseDPS = 50f;
+    public int laserTurretDamageLevel = 1;
+    public float laserTurretCooldown = 4f;
+    public int laserTurretCooldownLevel = 1;
+    public float laserTurretDuration = 2.5f;
+    public int laserTurretDurationLevel = 1;
 }
