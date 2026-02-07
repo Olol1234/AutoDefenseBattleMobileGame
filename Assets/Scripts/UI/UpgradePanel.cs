@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UpgradePanel : MonoBehaviour
 {
@@ -8,6 +9,14 @@ public class UpgradePanel : MonoBehaviour
     public TMP_Text[] upgradeTexts;
     private List<UpgradeData> currentUpgrades;
     private float previousTimeScale;
+
+    // COLOR FOR BUTTONS BASED ON RARITY
+    public Button[] upgradeButtons;
+    public Color commonColor = Color.white;
+    public Color uncommonColor = Color.green;
+    public Color rareColor = Color.blue;
+    public Color epicColor = new Color(0.6f, 0f, 1f);
+    public Color legendaryColor = Color.yellow;
 
     private void OnEnable()
     {
@@ -17,6 +26,20 @@ public class UpgradePanel : MonoBehaviour
     private void OnDisable()
     {
         PlayerExp.OnLevelUpEvent -= ShowPanel;
+    }
+
+    Color GetRarityColor(UpgradeRarity rarity)
+    {
+        switch(rarity)
+        {
+            case UpgradeRarity.Common: return commonColor;
+            case UpgradeRarity.Uncommon: return uncommonColor;
+            case UpgradeRarity.Rare: return rareColor;
+            case UpgradeRarity.Epic: return epicColor;
+            case UpgradeRarity.Legendary: return legendaryColor;
+        }
+
+        return commonColor;
     }
 
     void ShowPanel()
@@ -33,6 +56,9 @@ public class UpgradePanel : MonoBehaviour
             upgradeTexts[i].text =
                 currentUpgrades[i].name + "\n" +
                 currentUpgrades[i].description;
+
+            var btnImage = upgradeButtons[i].GetComponent<Image>();
+            btnImage.color = GetRarityColor(currentUpgrades[i].rarity);
         }
     }
 
