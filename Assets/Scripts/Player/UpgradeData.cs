@@ -5,12 +5,14 @@ public class UpgradeData
     public UpgradeType type;
     public string name;
     public string description;
+    public UpgradeRarity rarity;
 
-    public UpgradeData(UpgradeType type, string name, string description)
+    public UpgradeData(UpgradeType type, string name, string description, UpgradeRarity rarity)
     {
         this.type = type;
         this.name = name;
         this.description = description;
+        this.rarity = rarity;
     }
 
     public void Apply()
