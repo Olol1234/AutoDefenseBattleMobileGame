@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
@@ -13,78 +14,106 @@ public class UpgradeManager : MonoBehaviour
         InitUpgrades();
     }
 
+    UpgradeRarity RollRarity()
+    {
+        float roll = Random.Range(0f, 1f);
+
+        if (roll < 0.5f)
+            return UpgradeRarity.Common;
+        else if (roll < 0.8f)
+            return UpgradeRarity.Uncommon;
+        else if (roll < 0.95f)
+            return UpgradeRarity.Rare;
+        else if (roll < 0.99f)
+            return UpgradeRarity.Epic;
+        else
+            return UpgradeRarity.Legendary;
+    }
+
     void InitUpgrades()
     {
         allUpgrades.Add(new UpgradeData(
             UpgradeType.DamagePercent,
             "+50% Damage",
-            "Increase damage by 50%"
+            "Increase damage by 50%",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.ExtraBullet,
             "+1 Bullet",
-            "Fire an additional bullet"
+            "Fire an additional bullet",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.Penetration,
             "+1 Penetration",
-            "Bullets pierce 1 more enemy"
+            "Bullets pierce 1 more enemy",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.AttackSpeed,
             "+50% Attack Speed",
-            "Shoot faster"
+            "Shoot faster",
+            UpgradeRarity.Uncommon
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.HomingMissileTurret,
             "Homing Missile Turret",
-            "Deploy a Homing Missile Turret to assist you in battle"
+            "Deploy a Homing Missile Turret to assist you in battle",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.HomingMissileTurretCooldown,
             "-10% Turret Cooldown",
-            "Reduce Homing Missile Turret's cooldown by 10%"
+            "Reduce Homing Missile Turret's cooldown by 10%",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.HomingMissileTurretDamagePercent,
             "+20% Turret Damage",
-            "Increase Homing Missile Turret's damage by 20%"
+            "Increase Homing Missile Turret's damage by 20%",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.HomingMissileTurretExtraMissile,
             "+1 Extra Missile",
-            "Homing Missile Turret fires 1 additional missile"
+            "Homing Missile Turret fires 1 additional missile",
+            UpgradeRarity.Uncommon
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.LaserTurret,
             "Laser Turret",
-            "Deploy a Laser Turret to assist you in battle"
+            "Deploy a Laser Turret to assist you in battle",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.LaserTurretCooldown,
             "-10% Turret Cooldown",
-            "Reduce Laser Turret's cooldown by 10%"
+            "Reduce Laser Turret's cooldown by 10%",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.LaserTurretDamagePercent,
             "+20% Turret Damage",
-            "Increase Laser Turret's damage by 20%"
+            "Increase Laser Turret's damage by 20%",
+            UpgradeRarity.Common
         ));
 
         allUpgrades.Add(new UpgradeData(
             UpgradeType.LaserTurretDuration,
             "+0.5s Turret Duration",
-            "Increase Laser Turret's active duration by 0.5 seconds"
+            "Increase Laser Turret's active duration by 0.5 seconds",
+            UpgradeRarity.Uncommon
         ));
 
     }
@@ -175,9 +204,22 @@ public class UpgradeManager : MonoBehaviour
 
         for (int i = 0; i < count && pool.Count > 0; i++)
         {
-            int index = Random.Range(0, pool.Count);
-            result.Add(pool[index]);
-            pool.RemoveAt(index);
+            UpgradeRarity rarity = RollRarity();
+            var rarityPool = pool.Where(u => u.rarity == rarity).ToList();
+
+            if (rarityPool.Count == 0)
+            {
+                // If no upgrades of this rarity, pick any upgrade from the pool
+                int index = Random.Range(0, pool.Count);
+                result.Add(pool[index]);
+                pool.RemoveAt(index);
+            }
+            else
+            {
+                int index = Random.Range(0, rarityPool.Count);
+                result.Add(rarityPool[index]);
+                pool.Remove(rarityPool[index]);
+            }
         }
 
         return result;
