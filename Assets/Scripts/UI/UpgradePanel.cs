@@ -10,8 +10,9 @@ public class UpgradePanel : MonoBehaviour
     private List<UpgradeData> currentUpgrades;
     private float previousTimeScale;
 
-    // COLOR FOR BUTTONS BASED ON RARITY
-    public Button[] upgradeButtons;
+    // COLOR FOR BORDER BASED ON RARITY
+    // public Button[] upgradeButtons;
+    public Image[] upgradeBorders;
     public Color commonColor = Color.white;
     public Color uncommonColor = Color.green;
     public Color rareColor = Color.blue;
@@ -57,8 +58,8 @@ public class UpgradePanel : MonoBehaviour
                 currentUpgrades[i].name + "\n" +
                 currentUpgrades[i].description;
 
-            var btnImage = upgradeButtons[i].GetComponent<Image>();
-            btnImage.color = GetRarityColor(currentUpgrades[i].rarity);
+            var borderImage = upgradeBorders[i];
+            borderImage.color = GetRarityColor(currentUpgrades[i].rarity);
         }
     }
 
