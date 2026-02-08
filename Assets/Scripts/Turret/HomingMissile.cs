@@ -12,6 +12,8 @@ public class HomingMissile : MonoBehaviour
     private Transform target;
     private Rigidbody2D rb;
 
+    [SerializeField] GameObject shockwaveEffectPrefab;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -66,6 +68,15 @@ public class HomingMissile : MonoBehaviour
             if (hitEffectPrefab != null)
             {
                 Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            }
+            if (shockwaveEffectPrefab != null)
+            {
+                GameObject shockwaveInstance = Instantiate(shockwaveEffectPrefab, transform.position, Quaternion.identity);
+                ShockwaveExpand shockwave = shockwaveInstance.GetComponent<ShockwaveExpand>();
+                if (shockwave != null)
+                {
+                    shockwave.damage = damage;
+                }
             }
             Destroy(gameObject);
         }
