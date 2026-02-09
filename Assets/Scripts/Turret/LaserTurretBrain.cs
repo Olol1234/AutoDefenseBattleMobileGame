@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Net;
+using NUnit.Framework;
 
 public class LaserTurretBrain : MonoBehaviour
 {
@@ -25,6 +26,13 @@ public class LaserTurretBrain : MonoBehaviour
     [SerializeField] float sweepSpeed = 2f;
     private float sweepTimer;
     public LineRenderer sweepLineRenderer;
+
+    [Header("Another 2 laser")]
+    [SerializeField] LineRenderer leftLineRenderer;
+    [SerializeField] LineRenderer rightLineRenderer;
+    [SerializeField] float sideAngle = 40f;
+    [SerializeField] float sideDamageMultiplier = 0.8f;
+    public bool hasSideLaser = false;
 
     [Header("Run Stats")]
     public float damageMultiplier = 1f;
@@ -69,6 +77,7 @@ public class LaserTurretBrain : MonoBehaviour
         lowerCooldownFactor = 0f;
         extraDuration = 0f;
         hasSweepLaser = false;
+        hasSideLaser = false;
     }
 
     public float GetDamage()
@@ -118,6 +127,12 @@ public class LaserTurretBrain : MonoBehaviour
         if (hasSweepLaser && sweepLineRenderer != null)
             sweepLineRenderer.enabled = true;
 
+        if (hasSideLaser)
+        {
+            if (leftLineRenderer) leftLineRenderer.enabled = true;
+            if (rightLineRenderer) rightLineRenderer.enabled = true;
+        }
+
         float timer = 0f;
 
         Vector2 dir = (target.position - firePoint.position).normalized;
@@ -144,6 +159,16 @@ public class LaserTurretBrain : MonoBehaviour
             }
             lineRenderer.SetPosition(0, start);
             lineRenderer.SetPosition(1, end);
+
+            // Side laser
+            if (hasSideLaser)
+            {
+                Vector2 leftDir = Quaternion.Euler(0, 0, -sideAngle) * dir;
+                Vector2 rightDir = Quaternion.Euler(0, 0, sideAngle) * dir;
+
+                FireSideLaser(leftDir, leftLineRenderer, start);
+                FireSideLaser(rightDir, rightLineRenderer, start);
+            }
 
             // Sweep Laser
             if (hasSweepLaser && sweepLineRenderer != null)
@@ -174,8 +199,9 @@ public class LaserTurretBrain : MonoBehaviour
 
         lineRenderer.enabled = false;
 
-        if (sweepLineRenderer != null)
-        sweepLineRenderer.enabled = false;
+        if (sweepLineRenderer != null) sweepLineRenderer.enabled = false;
+        if (leftLineRenderer != null) leftLineRenderer.enabled = false;
+        if (rightLineRenderer != null) rightLineRenderer.enabled = false;
 
         isFiring = false;
         isCooling = true;
@@ -205,4 +231,26 @@ public class LaserTurretBrain : MonoBehaviour
 
         return closest;
     }
+
+    void FireSideLaser(Vector2 dir, LineRenderer lr, Vector2 start)
+    {
+        if (lr == null) return;
+
+        // Vector2 start = firePoint.position;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(start, dir, maxLaserLength);
+        Vector2 end = start + dir * maxLaserLength;
+
+        foreach (var hit in hits)
+        {
+            var enemy = hit.collider.GetComponent<HealthEnemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(GetDamage() * sideDamageMultiplier * Time.deltaTime);
+            }
+        }
+
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
+    }
+
 }
