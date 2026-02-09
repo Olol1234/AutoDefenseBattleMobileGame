@@ -84,6 +84,11 @@ public class UpgradeData
                 LaserTurretBrain.Instance.hasSweepLaser = true;
                 UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.LaserTurretSweepingLaser);
                 break;
+
+            case UpgradeType.LaserTurretSideLaser:
+                LaserTurretBrain.Instance.hasSideLaser = true;
+                UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.LaserTurretSideLaser);
+                break;
         }
     }
 

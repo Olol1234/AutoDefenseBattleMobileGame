@@ -14,5 +14,6 @@ public enum UpgradeType
     LaserTurretCooldown,
     LaserTurretDamagePercent,
     LaserTurretDuration,
-    LaserTurretSweepingLaser
+    LaserTurretSweepingLaser,
+    LaserTurretSideLaser
 }

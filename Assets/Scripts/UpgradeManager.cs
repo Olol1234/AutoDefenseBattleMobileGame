@@ -138,6 +138,13 @@ public class UpgradeManager : MonoBehaviour
             UpgradeRarity.Rare
         ));
 
+        allUpgrades.Add(new UpgradeData(
+            UpgradeType.LaserTurretSideLaser,
+            "Side Laser",
+            "Laser Turret has an additional 2 side laser",
+            UpgradeRarity.Rare
+        ));
+
     }
 
     bool IsTurretUnlocked(UpgradeType type)
@@ -184,7 +191,8 @@ public class UpgradeManager : MonoBehaviour
             return type == UpgradeType.LaserTurretCooldown ||
                 type == UpgradeType.LaserTurretDamagePercent ||
                 type == UpgradeType.LaserTurretDuration ||
-                type == UpgradeType.LaserTurretSweepingLaser;
+                type == UpgradeType.LaserTurretSweepingLaser ||
+                type == UpgradeType.LaserTurretSideLaser;
         }
 
         return false;
