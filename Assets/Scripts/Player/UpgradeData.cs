@@ -59,6 +59,11 @@ public class UpgradeData
                 UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.HomingMissileTurretShockwaveOnImpact);
                 break;
 
+            case UpgradeType.HomingMissileTurretMiniMissiles:
+                HomingMissileBrain.Instance.hasMiniMissiles = true;
+                UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.HomingMissileTurretMiniMissiles);
+                break;
+
             case UpgradeType.LaserTurret:
                 TurretManager.Instance.SpawnTurret(TurretType.LaserTurret);
                 break;

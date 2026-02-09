@@ -9,6 +9,7 @@ public enum UpgradeType
     HomingMissileTurretDamagePercent,
     HomingMissileTurretExtraMissile,
     HomingMissileTurretShockwaveOnImpact,
+    HomingMissileTurretMiniMissiles,
     LaserTurret,
     LaserTurretCooldown,
     LaserTurretDamagePercent,

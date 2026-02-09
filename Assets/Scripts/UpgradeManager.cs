@@ -97,6 +97,13 @@ public class UpgradeManager : MonoBehaviour
         ));
 
         allUpgrades.Add(new UpgradeData(
+            UpgradeType.HomingMissileTurretMiniMissiles,
+            "Mini Missiles",
+            "Homing Missiles spawn smaller mini missiles upon impact",
+            UpgradeRarity.Rare
+        ));
+
+        allUpgrades.Add(new UpgradeData(
             UpgradeType.LaserTurret,
             "Laser Turret",
             "Deploy a Laser Turret to assist you in battle",
@@ -161,7 +168,8 @@ public class UpgradeManager : MonoBehaviour
             return type == UpgradeType.HomingMissileTurretCooldown ||
                 type == UpgradeType.HomingMissileTurretDamagePercent ||
                 type == UpgradeType.HomingMissileTurretExtraMissile ||
-                type == UpgradeType.HomingMissileTurretShockwaveOnImpact;
+                type == UpgradeType.HomingMissileTurretShockwaveOnImpact ||
+                type == UpgradeType.HomingMissileTurretMiniMissiles;
         }
 
         if (turretType == UpgradeType.LaserTurret)
