@@ -108,6 +108,10 @@ MonoBehaviour:
   turnSpeed: 330
   hitEffectPrefab: {fileID: 7306516334815858759, guid: f5cd9bb65330c3a4db993edf1f6208dc, type: 3}
   shockwaveEffectPrefab: {fileID: 3892685586387364444, guid: 8fc20c38a7da50649bff5e4a8df9f853, type: 3}
+  miniMissilePrefab: {fileID: 5735019563429570414}
+  miniMissileCount: 3
+  miniDamageMultiplier: 0.6
+  isMiniMissile: 0
 --- !u!50 &5655122537759239971
 Rigidbody2D:
   serializedVersion: 5
