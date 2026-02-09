@@ -20,6 +20,12 @@ public class LaserTurretBrain : MonoBehaviour
     public float range = 14f;
     public LayerMask enemyLayer;
 
+    [Header("Sweep Laser")]
+    [SerializeField] float sweepAngle = 100f;
+    [SerializeField] float sweepSpeed = 2f;
+    private float sweepTimer;
+    public LineRenderer sweepLineRenderer;
+
     [Header("Run Stats")]
     public float damageMultiplier = 1f;
     public float damageAddition = 0f;
@@ -27,6 +33,7 @@ public class LaserTurretBrain : MonoBehaviour
     public int extraLaser = 0;
     public float lowerCooldownFactor = 0f;
     public float extraDuration = 0f;
+    public bool hasSweepLaser = false;
 
     private bool isFiring = false;
     private bool isCooling = false;
@@ -61,6 +68,7 @@ public class LaserTurretBrain : MonoBehaviour
         extraLaser = 0;
         lowerCooldownFactor = 0f;
         extraDuration = 0f;
+        hasSweepLaser = false;
     }
 
     public float GetDamage()
@@ -107,22 +115,24 @@ public class LaserTurretBrain : MonoBehaviour
         isFiring = true;
         lineRenderer.enabled = true;
 
+        if (hasSweepLaser && sweepLineRenderer != null)
+            sweepLineRenderer.enabled = true;
+
         float timer = 0f;
 
         Vector2 dir = (target.position - firePoint.position).normalized;
 
-        // while (timer < laserDuration)
-        while (timer < GetDuration())
+        float duration = GetDuration();
+
+        while (timer < duration)
         {
             timer += Time.deltaTime;
 
             Vector2 start = firePoint.position;
 
-            // Implement raycast here
+            // Main Laser
             RaycastHit2D[] hits = Physics2D.RaycastAll(start, dir, maxLaserLength);
-
             Vector2 end = start + dir * maxLaserLength;
-
             foreach (var hit in hits)
             {
                 HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
@@ -132,14 +142,40 @@ public class LaserTurretBrain : MonoBehaviour
                     enemy.TakeDamage(GetDamage() * Time.deltaTime);
                 }
             }
-
             lineRenderer.SetPosition(0, start);
             lineRenderer.SetPosition(1, end);
+
+            // Sweep Laser
+            if (hasSweepLaser && sweepLineRenderer != null)
+            {
+                float sweepProgress = timer / duration;
+                float angle = Mathf.Lerp(-sweepAngle * 0.5f, sweepAngle * 0.5f, sweepProgress);
+
+                Quaternion rot = Quaternion.Euler(0, 0, angle);
+                Vector2 sweepDir = rot * firePoint.up;
+
+                RaycastHit2D[] sweepHits = Physics2D.RaycastAll(start, sweepDir, maxLaserLength);
+                Vector2 sweepEnd = start + sweepDir * maxLaserLength;
+                foreach (var hit in sweepHits)
+                {
+                    HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
+                    if (enemy != null)
+                    {
+                        enemy.TakeDamage(GetDamage() * 0.65f * Time.deltaTime);
+                    }
+                }
+
+                sweepLineRenderer.SetPosition(0, start);
+                sweepLineRenderer.SetPosition(1, sweepEnd);
+            }
 
             yield return null;
         }
 
         lineRenderer.enabled = false;
+
+        if (sweepLineRenderer != null)
+        sweepLineRenderer.enabled = false;
 
         isFiring = false;
         isCooling = true;
