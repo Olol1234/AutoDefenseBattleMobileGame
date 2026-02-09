@@ -7,6 +7,7 @@ public class UpgradeManager : MonoBehaviour
     public static UpgradeManager Instance;
 
     private List<UpgradeData> allUpgrades = new List<UpgradeData>();
+    private HashSet<UpgradeType> uniqueUpgradesTaken = new HashSet<UpgradeType>();
 
     private void Awake()
     {
@@ -89,6 +90,13 @@ public class UpgradeManager : MonoBehaviour
         ));
 
         allUpgrades.Add(new UpgradeData(
+            UpgradeType.HomingMissileTurretShockwaveOnImpact,
+            "Shockwave on Impact",
+            "Homing Missiles create a shockwave upon impact, damaging nearby enemies",
+            UpgradeRarity.Rare
+        ));
+
+        allUpgrades.Add(new UpgradeData(
             UpgradeType.LaserTurret,
             "Laser Turret",
             "Deploy a Laser Turret to assist you in battle",
@@ -152,7 +160,8 @@ public class UpgradeManager : MonoBehaviour
         {
             return type == UpgradeType.HomingMissileTurretCooldown ||
                 type == UpgradeType.HomingMissileTurretDamagePercent ||
-                type == UpgradeType.HomingMissileTurretExtraMissile;
+                type == UpgradeType.HomingMissileTurretExtraMissile ||
+                type == UpgradeType.HomingMissileTurretShockwaveOnImpact;
         }
 
         if (turretType == UpgradeType.LaserTurret)
@@ -163,6 +172,11 @@ public class UpgradeManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void MarkUpgradeTaken(UpgradeType type)
+    {
+        uniqueUpgradesTaken.Add(type);
     }
 
     public List<UpgradeData> GetRandomUpgrades(int count)
@@ -196,6 +210,8 @@ public class UpgradeManager : MonoBehaviour
                 if (spawned && upgrade.type == UpgradeType.LaserTurret) continue;
             }
 
+            if (uniqueUpgradesTaken.Contains(upgrade.type))
+                continue;
             pool.Add(upgrade);
         }
 
