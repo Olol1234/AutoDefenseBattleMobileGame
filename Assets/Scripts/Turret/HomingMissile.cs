@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class HomingMissile : MonoBehaviour
@@ -69,7 +70,7 @@ public class HomingMissile : MonoBehaviour
             {
                 Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
             }
-            if (shockwaveEffectPrefab != null)
+            if (shockwaveEffectPrefab != null && HomingMissileBrain.Instance.hasShockwaveOnImpact)
             {
                 GameObject shockwaveInstance = Instantiate(shockwaveEffectPrefab, transform.position, Quaternion.identity);
                 ShockwaveExpand shockwave = shockwaveInstance.GetComponent<ShockwaveExpand>();
