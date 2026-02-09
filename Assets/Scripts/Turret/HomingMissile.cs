@@ -15,6 +15,12 @@ public class HomingMissile : MonoBehaviour
 
     [SerializeField] GameObject shockwaveEffectPrefab;
 
+    // Mini missile
+    [SerializeField] GameObject miniMissilePrefab;
+    [SerializeField] int miniMissileCount = 3;
+    [SerializeField] float miniDamageMultiplier = 0.6f;
+    public bool isMiniMissile = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +39,29 @@ public class HomingMissile : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+    }
+
+    void SpawnMiniMissiles()
+    {
+        float spreadAngle = 100f;
+
+        for (int i = 0; i < miniMissileCount; i++)
+        {
+            float angle = -spreadAngle / 2f + spreadAngle * i / (miniMissileCount - 1);
+
+            Quaternion rot = Quaternion.Euler(0, 0, transform.eulerAngles.z + angle);
+
+            GameObject mini = Instantiate(miniMissilePrefab, transform.position, rot);
+            mini.transform.localScale *= 0.7f;
+
+            HomingMissile hm = mini.GetComponent<HomingMissile>();
+
+            if (hm != null)
+            {
+                hm.damage = damage * miniDamageMultiplier;
+                hm.isMiniMissile = true;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -78,6 +107,10 @@ public class HomingMissile : MonoBehaviour
                 {
                     shockwave.damage = damage;
                 }
+            }
+            if (!isMiniMissile && HomingMissileBrain.Instance.hasMiniMissiles)
+            {
+                SpawnMiniMissiles();
             }
             Destroy(gameObject);
         }

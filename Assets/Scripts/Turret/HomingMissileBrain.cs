@@ -22,6 +22,7 @@ public class HomingMissileBrain : MonoBehaviour
     public int extraMissile = 0;
     public float lowerCooldownFactor = 0f;
     public bool hasShockwaveOnImpact = false;
+    public bool hasMiniMissiles = false;
 
     private Camera mainCam;
 
@@ -53,6 +54,7 @@ public class HomingMissileBrain : MonoBehaviour
         extraMissile = 0;
         lowerCooldownFactor = 0f;
         hasShockwaveOnImpact = false;
+        hasMiniMissiles = false;
     }
 
     public float GetDamage()
