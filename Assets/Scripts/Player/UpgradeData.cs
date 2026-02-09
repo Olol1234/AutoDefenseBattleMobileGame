@@ -79,6 +79,11 @@ public class UpgradeData
             case UpgradeType.LaserTurretDuration:
                 LaserTurretBrain.Instance.extraDuration += 0.5f;
                 break;
+
+            case UpgradeType.LaserTurretSweepingLaser:
+                LaserTurretBrain.Instance.hasSweepLaser = true;
+                UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.LaserTurretSweepingLaser);
+                break;
         }
     }
 

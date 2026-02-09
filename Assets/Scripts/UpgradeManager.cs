@@ -131,6 +131,13 @@ public class UpgradeManager : MonoBehaviour
             UpgradeRarity.Uncommon
         ));
 
+        allUpgrades.Add(new UpgradeData(
+            UpgradeType.LaserTurretSweepingLaser,
+            "Sweeping Laser",
+            "Laser Turret attack with an additional sweeping laser",
+            UpgradeRarity.Rare
+        ));
+
     }
 
     bool IsTurretUnlocked(UpgradeType type)
@@ -176,7 +183,8 @@ public class UpgradeManager : MonoBehaviour
         {
             return type == UpgradeType.LaserTurretCooldown ||
                 type == UpgradeType.LaserTurretDamagePercent ||
-                type == UpgradeType.LaserTurretDuration;
+                type == UpgradeType.LaserTurretDuration ||
+                type == UpgradeType.LaserTurretSweepingLaser;
         }
 
         return false;
