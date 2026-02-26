@@ -70,15 +70,28 @@ public class PlayerShoot : MonoBehaviour
                 Mathf.Atan2(bulletDir.y, bulletDir.x) * Mathf.Rad2Deg - 90f
             );
 
-            GameObject bullet = Instantiate(
+            // GameObject bullet = Instantiate(
+            //     bulletPrefab,
+            //     spawnPos,
+            //     bulletRot
+            // );
+            GameObject pooledBullet = ObjectPooler.Instance.GetFromPool(
                 bulletPrefab,
                 spawnPos,
                 bulletRot
             );
 
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            if (pooledBullet != null)
+            {
+                Rigidbody2D rb = pooledBullet.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = bulletDir * bulletSpeed;
+                }
+            }
+            // Rigidbody2D rb = pooledBullet.GetComponent<Rigidbody2D>();
             // rb.linearVelocity = bulletDir * (bulletSpeed * Time.timeScale);
-            rb.linearVelocity = bulletDir * bulletSpeed;
+            // rb.linearVelocity = bulletDir * bulletSpeed;
         }
 
     }

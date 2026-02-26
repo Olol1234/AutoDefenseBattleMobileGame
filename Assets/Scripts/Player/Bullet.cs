@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject bulletPrefab;
     public float lifeTime = 5f;
-    // private float damage = PlayerStats.Instance.GetDamage();
     private float remainingPenetration;
     private HashSet<GameObject> hitEnemies = new HashSet<GameObject>();
 
-    void Start()
-    {
-        Destroy(gameObject, lifeTime);
-        remainingPenetration = PlayerStats.Instance.GetPenetration();
-    }
+    // void Start()
+    // {
+    //     Destroy(gameObject, lifeTime);
+    //     remainingPenetration = PlayerStats.Instance.GetPenetration();
+    // }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,7 +29,21 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            DisableBullet();
         }
+    }
+
+    void OnEnable()
+    {
+        remainingPenetration = PlayerStats.Instance.GetPenetration();
+        hitEnemies.Clear();
+        CancelInvoke();
+        Invoke("DisableBullet", lifeTime);
+    }
+
+    void DisableBullet()
+    {
+        ObjectPooler.Instance.ReturnToPool(bulletPrefab, gameObject);
     }
 }
