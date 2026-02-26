@@ -129,6 +129,9 @@ public class LevelManager : MonoBehaviour
     public void ReturnToMenu()
     {
         Time.timeScale = 1f;
+        // MainMenu.Instance.selectedStage = currentStage;
+        PlayerPrefs.SetInt("SelectedStage", currentStage);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("MainMenuScene");
     }
 

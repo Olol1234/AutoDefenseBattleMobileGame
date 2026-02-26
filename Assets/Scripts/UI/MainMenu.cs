@@ -12,6 +12,7 @@ public class StageData
 
 public class MainMenu : MonoBehaviour
 {
+    public static MainMenu Instance;
     public int selectedStage = 1;
     public TMP_Text stageText;
     public UnityEngine.UI.Image stageImage;
@@ -27,6 +28,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        selectedStage = PlayerPrefs.GetInt("SelectedStage", 1);
         UpdateUI();
     }
 
