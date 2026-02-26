@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7aeb715c22c2541bb34209cce123e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8815686471070546147}
   lifeTime: 5
 --- !u!212 &8368599831379768370
 SpriteRenderer:
