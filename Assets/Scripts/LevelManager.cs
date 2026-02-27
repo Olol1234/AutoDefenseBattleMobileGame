@@ -72,6 +72,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if (stageEnded) return;
+        if (PauseManager.IsPaused) return;
         elapsedTime += Time.deltaTime * gameSpeed;
         if (ElapsedTime >= 60f)
         {
