@@ -41,6 +41,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.IsPaused) return;
         if (!spawnActive) return;
         if (LevelManager.Instance.IsLevelOver()) return;
 
