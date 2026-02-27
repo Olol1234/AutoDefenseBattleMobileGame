@@ -10,21 +10,39 @@ public class PlayerShoot : MonoBehaviour
     public float bulletSpeed = 10f;
     // private float fireRate = PlayerStats.Instance.GetAttackSpeed();
     private float nextFireTime = 0f;
+    private float fireTimer = 0f;
 
     void Update()
     {
+        if (PauseManager.IsPaused)
+        {
+            return;
+        }
+        fireTimer += Time.deltaTime;
         GameObject target = GetNearestEnemyInRange();
 
         if (target != null)
         {
             AimAtTarget(target.transform);
 
-            if (Time.time >= nextFireTime)
+            float speed = PlayerStats.Instance.GetAttackSpeed();
+
+            // if (Time.time >= nextFireTime)
+            // {
+            //     Shoot(target);
+            //     nextFireTime = Time.time + PlayerStats.Instance.GetAttackSpeed();
+            // }
+            if (fireTimer >= speed)
             {
                 Shoot(target);
-                nextFireTime = Time.time + PlayerStats.Instance.GetAttackSpeed();
+                fireTimer = 0f;
             }
         }
+    }
+
+    public void ResetFireTimer()
+    {
+        nextFireTime = Time.time;
     }
 
     void Shoot(GameObject target)
@@ -86,6 +104,8 @@ public class PlayerShoot : MonoBehaviour
                 Rigidbody2D rb = pooledBullet.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
+                    rb.simulated = true;
+                    rb.linearVelocity = Vector2.zero;
                     rb.linearVelocity = bulletDir * bulletSpeed;
                 }
             }
