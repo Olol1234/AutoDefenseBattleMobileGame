@@ -102,6 +102,7 @@ public class LaserTurretBrain : MonoBehaviour
     IEnumerator LaserRoutine()
     {
         yield return new WaitForSeconds(2f);
+        yield return new WaitUntil(() => !PauseManager.IsPaused);
 
         while (true)
         {
@@ -141,6 +142,12 @@ public class LaserTurretBrain : MonoBehaviour
 
         while (timer < duration)
         {
+            if (PauseManager.IsPaused)
+            {
+                yield return null;
+                continue;
+            }
+
             timer += Time.deltaTime;
 
             Vector2 start = firePoint.position;
@@ -206,8 +213,17 @@ public class LaserTurretBrain : MonoBehaviour
         isFiring = false;
         isCooling = true;
 
-        // yield return new WaitForSeconds(laserCooldown);
-        yield return new WaitForSeconds(GetCooldown());
+        // yield return new WaitForSeconds(GetCooldown());
+        float cooldownTimer = 0f;
+        float cooldownDuration = GetCooldown();
+        while (cooldownTimer < cooldownDuration)
+        {
+            if (!PauseManager.IsPaused)
+            {
+                cooldownTimer += Time.deltaTime;
+            }
+            yield return null;
+        }
 
         isCooling = false;
     }
