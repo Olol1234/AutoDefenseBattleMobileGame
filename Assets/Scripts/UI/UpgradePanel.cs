@@ -47,7 +47,8 @@ public class UpgradePanel : MonoBehaviour
     {
         GameInput.GameplayEnabled = false;
         previousTimeScale = Time.timeScale;
-        Time.timeScale = 0f;
+        // Time.timeScale = 0f;
+        PauseManager.Instance.Pause();
         upgradePanel.SetActive(true);
 
         currentUpgrades = UpgradeManager.Instance.GetRandomUpgrades(4);
@@ -69,7 +70,8 @@ public class UpgradePanel : MonoBehaviour
         currentUpgrades[index].Apply();
 
         GameInput.GameplayEnabled = true;
-        Time.timeScale = previousTimeScale;
+        // Time.timeScale = previousTimeScale;
+        PauseManager.Instance.Resume();
         upgradePanel.SetActive(false);
     }
 }
