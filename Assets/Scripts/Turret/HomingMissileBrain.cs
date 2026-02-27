@@ -78,8 +78,7 @@ public class HomingMissileBrain : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log("Turret Update Running");
-
+        if (PauseManager.IsPaused) return;
         CleanEnemyList();
         SelectTarget();
         AimAtTarget();
