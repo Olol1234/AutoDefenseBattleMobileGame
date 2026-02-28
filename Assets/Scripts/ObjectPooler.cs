@@ -10,12 +10,14 @@ public class ObjectPooler : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    // This method handles everything: if a pool doesn't exist, it creates it on the fly
     public GameObject GetFromPool(GameObject prefab, Vector3 position, Quaternion rotation)
     {
+        if (prefab == null) return null;
+
         if (!poolDictionary.ContainsKey(prefab))
         {
             poolDictionary.Add(prefab, new Queue<GameObject>());
@@ -23,7 +25,7 @@ public class ObjectPooler : MonoBehaviour
 
         GameObject obj;
 
-        // If the queue is empty, we instantiate a new one (Expanding the pool)
+        // If the queue is empty, instantiate a new one (Expanding the pool)
         if (poolDictionary[prefab].Count == 0)
         {
             obj = Instantiate(prefab);
@@ -31,6 +33,11 @@ public class ObjectPooler : MonoBehaviour
             Bullet bulletScript = obj.GetComponent<Bullet>();
             if (bulletScript != null) {
                 bulletScript.bulletPrefab = prefab;
+            }
+            
+            HomingMissile missileScript = obj.GetComponent<HomingMissile>();
+            if (missileScript != null) {
+                missileScript.myPrefab = prefab;
             }
         }
         else
