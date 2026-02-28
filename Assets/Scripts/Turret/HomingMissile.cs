@@ -48,18 +48,24 @@ public class HomingMissile : MonoBehaviour
         for (int i = 0; i < miniMissileCount; i++)
         {
             float angle = -spreadAngle / 2f + spreadAngle * i / (miniMissileCount - 1);
-
             Quaternion rot = Quaternion.Euler(0, 0, transform.eulerAngles.z + angle);
 
             GameObject mini = Instantiate(miniMissilePrefab, transform.position, rot);
             mini.transform.localScale *= 0.7f;
 
             HomingMissile hm = mini.GetComponent<HomingMissile>();
+            Rigidbody2D miniRb = mini.GetComponent<Rigidbody2D>();
 
             if (hm != null)
             {
                 hm.damage = damage * miniDamageMultiplier;
                 hm.isMiniMissile = true;
+
+                if (miniRb != null)
+                {
+                    miniRb.simulated = true;
+                    miniRb.linearVelocity = mini.transform.up * speed;
+                }
             }
         }
     }
