@@ -11457,7 +11457,7 @@ MonoBehaviour:
   upgradePanel: {fileID: 956205055}
   stagePanel: {fileID: 981546364}
   eventPanel: {fileID: 1348205436}
-  turretPanel: {fileID: 54709685}
+  turretPanel: {fileID: 218257722}
   turretDetailPanel: {fileID: 470800773}
   storeButtonImage: {fileID: 1421662116}
   upgradeButtonImage: {fileID: 1228884106}
