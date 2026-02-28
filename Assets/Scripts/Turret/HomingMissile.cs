@@ -27,10 +27,10 @@ public class HomingMissile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
-    {
-        // Destroy(gameObject, lifetime);
-    }
+    // void Start()
+    // {
+    //     // Destroy(gameObject, lifetime);
+    // }
 
     void OnEnable()
     {
