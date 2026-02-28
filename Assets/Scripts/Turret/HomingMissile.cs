@@ -44,13 +44,16 @@ public class HomingMissile : MonoBehaviour
     void SpawnMiniMissiles()
     {
         float spreadAngle = 100f;
+        float spawnOffset = 0.85f;
 
         for (int i = 0; i < miniMissileCount; i++)
         {
             float angle = -spreadAngle / 2f + spreadAngle * i / (miniMissileCount - 1);
             Quaternion rot = Quaternion.Euler(0, 0, transform.eulerAngles.z + angle);
 
-            GameObject mini = Instantiate(miniMissilePrefab, transform.position, rot);
+            Vector3 spawnPos = transform.position + (rot * Vector3.up * spawnOffset);
+
+            GameObject mini = Instantiate(miniMissilePrefab, spawnPos, rot);
             mini.transform.localScale *= 0.7f;
 
             HomingMissile hm = mini.GetComponent<HomingMissile>();
