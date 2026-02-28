@@ -18,24 +18,24 @@ public class PlayerShoot : MonoBehaviour
         {
             return;
         }
-        fireTimer += Time.deltaTime;
+        
         GameObject target = GetNearestEnemyInRange();
 
         if (target != null)
         {
+            fireTimer += Time.deltaTime;
             AimAtTarget(target.transform);
 
             float speed = PlayerStats.Instance.GetAttackSpeed();
 
-            // if (Time.time >= nextFireTime)
-            // {
-            //     Shoot(target);
-            //     nextFireTime = Time.time + PlayerStats.Instance.GetAttackSpeed();
-            // }
             if (fireTimer >= speed)
             {
                 Shoot(target);
                 fireTimer = 0f;
+            }
+            else
+            {
+                // could add a "charging" effect here based on fireTimer / speed
             }
         }
     }
@@ -47,6 +47,8 @@ public class PlayerShoot : MonoBehaviour
 
     void Shoot(GameObject target)
     {
+        if (target == null) return;
+
         Collider2D enemyCol = target.GetComponent<Collider2D>();
         if (enemyCol == null) return;
 
@@ -106,6 +108,8 @@ public class PlayerShoot : MonoBehaviour
                 {
                     rb.simulated = true;
                     rb.linearVelocity = Vector2.zero;
+                    rb.angularVelocity = 0f;
+
                     rb.linearVelocity = bulletDir * bulletSpeed;
                 }
             }
