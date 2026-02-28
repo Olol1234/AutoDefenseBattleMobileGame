@@ -5,8 +5,8 @@ public class HomingMissile : MonoBehaviour
 {
     public float speed = 3f;
     public float damage = 30f;
-    // public float damage = PlayerProfile.Instance.homingMissileTurretBaseDamage;
     public float lifetime = 10f;
+    private float currentLifetime;
     public float turnSpeed = 180f;
     public GameObject hitEffectPrefab;
 
@@ -17,6 +17,7 @@ public class HomingMissile : MonoBehaviour
 
     // Mini missile
     [SerializeField] GameObject miniMissilePrefab;
+    [HideInInspector] public GameObject myPrefab;
     [SerializeField] int miniMissileCount = 3;
     [SerializeField] float miniDamageMultiplier = 0.6f;
     public bool isMiniMissile = false;
@@ -28,7 +29,28 @@ public class HomingMissile : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, lifetime);
+        // Destroy(gameObject, lifetime);
+    }
+
+    void OnEnable()
+    {
+        currentLifetime = 0f;
+        target = null;
+
+        // Safety resets
+        transform.localScale = new Vector3(0.1f, 0.25f, 0f); 
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+    }
+
+    void Update()
+    {
+        if (PauseManager.IsPaused) return;
+
+        currentLifetime += Time.deltaTime;
+        if (currentLifetime >= lifetime)
+        {
+            ObjectPooler.Instance.ReturnToPool(myPrefab, gameObject);
+        }
     }
 
     public void Damage(float newDamage)
@@ -53,14 +75,18 @@ public class HomingMissile : MonoBehaviour
 
             Vector3 spawnPos = transform.position + (rot * Vector3.up * spawnOffset);
 
-            GameObject mini = Instantiate(miniMissilePrefab, spawnPos, rot);
-            mini.transform.localScale *= 0.7f;
+            // GameObject mini = Instantiate(miniMissilePrefab, spawnPos, rot);
+            GameObject mini = ObjectPooler.Instance.GetFromPool(miniMissilePrefab, spawnPos, rot);
+            mini.transform.localScale = new Vector3(0.08f, 0.18f, 0f);
 
             HomingMissile hm = mini.GetComponent<HomingMissile>();
             Rigidbody2D miniRb = mini.GetComponent<Rigidbody2D>();
 
             if (hm != null)
             {
+                hm.myPrefab = miniMissilePrefab;
+                hm.isMiniMissile = true;
+
                 hm.damage = damage * miniDamageMultiplier;
                 hm.isMiniMissile = true;
 
@@ -75,6 +101,8 @@ public class HomingMissile : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (PauseManager.IsPaused) return;
+
         if (target == null)
         {
             target = FindNewTarget();
@@ -121,7 +149,8 @@ public class HomingMissile : MonoBehaviour
             {
                 SpawnMiniMissiles();
             }
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            ObjectPooler.Instance.ReturnToPool(myPrefab, gameObject);
         }
     }
 

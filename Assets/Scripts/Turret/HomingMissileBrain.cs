@@ -12,6 +12,7 @@ public class HomingMissileBrain : MonoBehaviour
     private Transform currentTarget;
 
     public GameObject missilePrefab;
+    [HideInInspector] public GameObject myPrefab;
     public float spreadAngle = 15f;
     public Transform firePoint;
 
@@ -83,11 +84,6 @@ public class HomingMissileBrain : MonoBehaviour
         SelectTarget();
         AimAtTarget();
 
-        // if (currentTarget != null)
-        //     Debug.Log("TARGET LOCKED: " + currentTarget.name);
-        // else
-        //     Debug.Log("NO TARGET");
-
         fireTimer += Time.deltaTime;
 
         if (fireTimer >= GetFireCooldown())
@@ -111,20 +107,26 @@ public class HomingMissileBrain : MonoBehaviour
             Quaternion rot = firePoint.rotation *
                 Quaternion.Euler(0, 0, angleOffset);
 
-            GameObject missileObj = Instantiate(
+            // GameObject missileObj = Instantiate(
+            //     missilePrefab, firePoint.position, rot
+            // );
+            GameObject missileObj = ObjectPooler.Instance.GetFromPool(
                 missilePrefab, firePoint.position, rot
             );
 
-            HomingMissile missile = missileObj.GetComponent<HomingMissile>();
-            missile.Damage(GetDamage());
-
-            if (missile != null)
+            if (missileObj != null)
             {
+                HomingMissile missile = missileObj.GetComponent<HomingMissile>();
+
+                // missile.myPrefab = missilePrefab;
+                // missile.isMiniMissile = false;
+                missile.Damage(GetDamage());
+
                 Transform target = enemiesInRange[i % enemiesInRange.Count];
                 missile.SetTarget(target);
             }
         }
-        Debug.Log("Missile Fired!");
+        // Debug.Log("Missile Fired!");
     }
 
     // ---------------- COLLIDER RANGE ----------------
