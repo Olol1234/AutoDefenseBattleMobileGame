@@ -84,8 +84,10 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(randomX, spawnY, 0f);
 
-        GameObject enemyGO = Instantiate(prefab, spawnPos, Quaternion.identity);
-        ApplyStageScaling(enemyGO);
+        // GameObject enemyGO = Instantiate(prefab, spawnPos, Quaternion.identity);
+        GameObject enemyGo = ObjectPooler.Instance.GetFromPool(prefab, spawnPos, Quaternion.identity);
+
+        ApplyStageScaling(enemyGo);
 
         activeEnemyCount++;
 
