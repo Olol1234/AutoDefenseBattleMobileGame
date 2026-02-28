@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 5735019563429570414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.78573316, y: -3.747656, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.3, z: 0}
+  m_LocalPosition: {x: -0.78573316, y: -3.7781, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.25, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 8d4c60eca608dc345a47dddb32f632c8, type: 3}
-  m_Color: {r: 0.71938604, g: 0, b: 0.8867924, a: 1}
+  m_Sprite: {fileID: -9095717837082945937, guid: c298565a5fb924f48a1dd5a5cb300f5f, type: 3}
+  m_Color: {r: 0.5603716, g: 0.05446779, b: 0.6792453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 7306516334815858759, guid: f5cd9bb65330c3a4db993edf1f6208dc, type: 3}
   shockwaveEffectPrefab: {fileID: 3892685586387364444, guid: 8fc20c38a7da50649bff5e4a8df9f853, type: 3}
   miniMissilePrefab: {fileID: 5735019563429570414}
+  myPrefab: {fileID: 0}
   miniMissileCount: 3
   miniDamageMultiplier: 0.6
   isMiniMissile: 0
@@ -174,5 +175,5 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2}
   m_Direction: 0
