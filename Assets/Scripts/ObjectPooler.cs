@@ -34,10 +34,15 @@ public class ObjectPooler : MonoBehaviour
             if (bulletScript != null) {
                 bulletScript.bulletPrefab = prefab;
             }
-            
+
             HomingMissile missileScript = obj.GetComponent<HomingMissile>();
             if (missileScript != null) {
                 missileScript.myPrefab = prefab;
+            }
+
+            HealthEnemy enemyHealthScript = obj.GetComponent<HealthEnemy>();
+            if (enemyHealthScript != null) {
+                enemyHealthScript.myPrefab = prefab;
             }
         }
         else
