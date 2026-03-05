@@ -1,7 +1,8 @@
 ## AutoDefenseBattleMobileGame
 
-AutoDefenseBattleMobileGame is a vertical mobile defense game prototype built in Unity.
+AutoDefenseBattleMobileGame is a vertical mobile defense game prototype built in Unity 6000.0.43f1.
 The game focuses on scalable turret systems, upgrade progression, and dynamic UI architecture.
+Target Platform: Android / Mobile
 
 !!Some short gameplay vid!!
 https://youtube.com/shorts/htjrDkr6kgc
