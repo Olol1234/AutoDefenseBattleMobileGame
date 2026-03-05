@@ -111,6 +111,11 @@ public class PlayerShoot : MonoBehaviour
                     rb.angularVelocity = 0f;
 
                     rb.linearVelocity = bulletDir * bulletSpeed;
+
+                    if (AudioManager.instance != null)
+                    {
+                        AudioManager.instance.PlayPlayerShoot();
+                    }
                 }
             }
             // Rigidbody2D rb = pooledBullet.GetComponent<Rigidbody2D>();
