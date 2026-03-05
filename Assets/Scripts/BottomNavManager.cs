@@ -24,7 +24,7 @@ public class BottomNavManager : MonoBehaviour
 
     void Start()
     {
-        ShowStage(); // Default tab
+        ShowStage(false); // Default tab
     }
 
     void HideAll()
@@ -49,6 +49,7 @@ public class BottomNavManager : MonoBehaviour
 
     public void ShowStore()
     {
+        AudioManager.instance.PlayClick();
         HideAll();
         turretDetailPanel.Hide();
         storePanel.SetActive(true);
@@ -57,14 +58,19 @@ public class BottomNavManager : MonoBehaviour
 
     public void ShowUpgrade()
     {
+        AudioManager.instance.PlayClick();
         HideAll();
         turretDetailPanel.Hide();
         upgradePanel.SetActive(true);
         upgradeButtonImage.color = selectedColor;
     }
 
-    public void ShowStage()
+    public void ShowStage(bool playSound = true)
     {
+        if (playSound && AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayClick();
+        }
         HideAll();
         turretDetailPanel.Hide();
         stagePanel.SetActive(true);
@@ -73,6 +79,7 @@ public class BottomNavManager : MonoBehaviour
 
     public void ShowEvent()
     {
+        AudioManager.instance.PlayClick();
         HideAll();
         turretDetailPanel.Hide();
         eventPanel.SetActive(true);
@@ -81,6 +88,7 @@ public class BottomNavManager : MonoBehaviour
 
     public void ShowTurret()
     {
+        AudioManager.instance.PlayClick();
         HideAll();
         turretDetailPanel.Hide();
         turretPanel.SetActive(true);
