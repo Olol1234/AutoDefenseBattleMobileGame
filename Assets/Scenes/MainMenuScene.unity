@@ -1194,6 +1194,8 @@ MonoBehaviour:
   sfxSource: {fileID: 212643388}
   clickSound: {fileID: 8300000, guid: 02f71f42955b7924182f043b50594dae, type: 3}
   cancelSound: {fileID: 8300000, guid: 25995d26de3f0bf46aba2cabd8db7cd0, type: 3}
+  playerShootSound: {fileID: 8300000, guid: 246d36825b85ef144858b1824343ef4e, type: 3}
+  homingMissileSound: {fileID: 0}
 --- !u!4 &212643387
 Transform:
   m_ObjectHideFlags: 0
