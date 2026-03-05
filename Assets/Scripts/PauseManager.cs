@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
@@ -74,6 +75,7 @@ public class PauseManager : MonoBehaviour
     {
         if (pausePanel != null)
             pausePanel.SetActive(false);
+        IsPaused = false;
         Time.timeScale = 0f;
         LevelManager.Instance.EndStageLose();
         // if (LevelManager.Instance != null)
