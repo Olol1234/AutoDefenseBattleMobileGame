@@ -59,6 +59,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayStage()
     {
+        AudioManager.Instance.PlayClick();
         // Save selected stage
         PlayerPrefs.SetInt("SelectedStage", selectedStage);
 

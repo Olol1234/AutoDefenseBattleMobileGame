@@ -90,6 +90,8 @@ public class CharacterUpgradePanel : MonoBehaviour
 
     public void UpgradeDamage()
     {
+        AudioManager.Instance.PlayClick();
+
         int cost = GetDamageUpgradeCost();
         var profile = PlayerProfile.Instance;
 
@@ -106,6 +108,8 @@ public class CharacterUpgradePanel : MonoBehaviour
 
     public void UpgradeHP()
     {
+        AudioManager.Instance.PlayClick();
+
         int cost = GetHPUpgradeCost();
         var profile = PlayerProfile.Instance;
 
@@ -122,6 +126,8 @@ public class CharacterUpgradePanel : MonoBehaviour
 
     public void UpgradeFireRate()
     {
+        AudioManager.Instance.PlayClick();
+        
         int cost = GetFireRateUpgradeCost();
         var profile = PlayerProfile.Instance;
 

@@ -8,6 +8,7 @@ public class TurretButtonUI : MonoBehaviour
 
     public void OnClick()
     {
+        AudioManager.Instance.PlayClick();
         turretDetailPanel.Show(turretType);
     }
 }
