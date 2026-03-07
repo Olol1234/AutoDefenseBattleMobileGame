@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthEnemy : MonoBehaviour
@@ -11,18 +12,10 @@ public class HealthEnemy : MonoBehaviour
 
     [HideInInspector] public GameObject myPrefab;
 
-
-    // private void Start()
-    // {
-    //     float mult = 1f;
-
-    //     if (LevelManager.Instance != null)
-    //         mult = LevelManager.Instance.GetDifficultyMultiplier();
-
-    //     maxHealth = baseHealth * mult;
-    //     currentHealth = maxHealth;
-    //     // Debug.Log($"{gameObject.name} spawned with HP: {maxHealth}");
-    // }
+    [Header("Elemental Affinities")]
+    public List<ElementalType> weakness;   // Takes 2x Damage
+    public List<ElementalType> resistance; // Takes 0.5x Damage
+    public List<ElementalType> immunity;   // Takes 0 Damage
 
     void OnEnable()
     {
@@ -48,11 +41,28 @@ public class HealthEnemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, ElementalType damageType)
     {
         if (isDead) return;
-        currentHealth -= damage;
-        DamageTextSpawner.Instance?.Spawn((int)damage, transform.position);
+
+        float multiplier = 1f;
+        if (immunity != null && immunity.Contains(damageType))
+        {
+            multiplier = 0f;
+        }
+        else if (weakness != null && weakness.Contains(damageType))
+        {
+            multiplier *= 2f;
+        }
+        else if (resistance != null && resistance.Contains(damageType))
+        {
+            multiplier *= 0.5f;
+        }
+
+        float finalDamage = damage * multiplier;
+
+        currentHealth -= finalDamage;
+        DamageTextSpawner.Instance?.Spawn((int)finalDamage, transform.position);
 
         if (currentHealth <= 0)
         {
