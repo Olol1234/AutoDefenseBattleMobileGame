@@ -25,14 +25,14 @@ public class EnemyAimFortress : MonoBehaviour
         GameObject fortress = GameObject.FindGameObjectWithTag("Fortress");
         if (fortress == null)
         {
-            Debug.LogError("No object tagged 'Fortress' found.");
+            // Debug.LogError("No object tagged 'Fortress' found.");
             return;
         }
 
         FortressEdgeTargets edgeTargets = fortress.GetComponent<FortressEdgeTargets>();
         if (edgeTargets == null)
         {
-            Debug.LogError("Fortress is missing FortressEdgeTargets component.");
+            // Debug.LogError("Fortress is missing FortressEdgeTargets component.");
             return;
         }
 
