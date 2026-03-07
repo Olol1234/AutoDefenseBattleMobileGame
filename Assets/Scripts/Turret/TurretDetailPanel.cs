@@ -65,6 +65,12 @@ public class TurretDetailPanel : MonoBehaviour
 
     public void Hide()
     {
+        AudioManager.Instance.PlayCancel();
+        panelRoot.SetActive(false);
+    }
+
+    public void ClosePanelRoot()
+    {
         panelRoot.SetActive(false);
     }
 
@@ -76,6 +82,8 @@ public class TurretDetailPanel : MonoBehaviour
 
     public void OnUpgradeDamageClicked()
     {
+        AudioManager.Instance.PlayClick();
+
         bool success = TurretUpgradeHelper.UpgradeDamage(currentTurretType);
 
         if (success)
@@ -86,6 +94,8 @@ public class TurretDetailPanel : MonoBehaviour
 
     public void OnUpgradeCooldownClicked()
     {
+        AudioManager.Instance.PlayClick();
+
         bool success = TurretUpgradeHelper.UpgradeCooldown(currentTurretType);
 
         if (success)
