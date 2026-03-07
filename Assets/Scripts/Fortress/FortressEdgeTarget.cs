@@ -90,7 +90,7 @@ public class FortressEdgeTargets : MonoBehaviour
             }
         }
 
-        Debug.Log($"FortressEdgeTargets cached points: {cachedPoints.Count}");
+        // Debug.Log($"FortressEdgeTargets cached points: {cachedPoints.Count}");
     }
 
     bool PassesFilters(Vector2 worldPoint)

@@ -27,7 +27,7 @@ public class PlayerExp : MonoBehaviour
     public void AddExp(int amount)
     {
         currentExp += amount;
-        Debug.Log($"Gained {amount} EXP. Current: {currentExp}/{expToNextLevel}");
+        // Debug.Log($"Gained {amount} EXP. Current: {currentExp}/{expToNextLevel}");
 
         while (currentExp >= expToNextLevel)
         {
@@ -41,6 +41,6 @@ public class PlayerExp : MonoBehaviour
         level++;
         expToNextLevel = Mathf.RoundToInt(expToNextLevel * expGrowthMultiplier);
         OnLevelUpEvent?.Invoke();
-        Debug.Log($"LEVEL UP! Now Level {level}. Next EXP: {expToNextLevel}");
+        // Debug.Log($"LEVEL UP! Now Level {level}. Next EXP: {expToNextLevel}");
     }
 }
