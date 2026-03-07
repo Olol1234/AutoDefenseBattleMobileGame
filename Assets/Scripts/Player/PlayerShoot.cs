@@ -112,9 +112,9 @@ public class PlayerShoot : MonoBehaviour
 
                     rb.linearVelocity = bulletDir * bulletSpeed;
 
-                    if (AudioManager.instance != null)
+                    if (AudioManager.Instance != null)
                     {
-                        AudioManager.instance.PlayPlayerShoot();
+                        AudioManager.Instance.PlayPlayerShoot();
                     }
                 }
             }
