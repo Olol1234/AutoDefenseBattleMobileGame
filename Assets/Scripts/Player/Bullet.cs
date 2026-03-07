@@ -9,11 +9,9 @@ public class Bullet : MonoBehaviour
     private HashSet<GameObject> hitEnemies = new HashSet<GameObject>();
     private float currentLifeTime;
 
-    // void Start()
-    // {
-    //     Destroy(gameObject, lifeTime);
-    //     remainingPenetration = PlayerStats.Instance.GetPenetration();
-    // }
+    [Header("Elemental Settings")]
+    private ElementalType currentElement;
+    private float currentDamage;
 
     void Update()
     {
@@ -27,6 +25,23 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    public void Initialize(ElementalType type, float dmg)
+    {
+        currentElement = type;
+        currentDamage = dmg;
+        
+        // Optional: Change bullet color based on element
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null)        {
+            switch (currentElement)
+            {
+                case ElementalType.Fire:
+                    sr.color = Color.red;
+                    break;
+            }
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         HealthEnemy enemy = other.GetComponent<HealthEnemy>();
@@ -34,7 +49,7 @@ public class Bullet : MonoBehaviour
         if (hitEnemies.Contains(other.gameObject)) return;
         hitEnemies.Add(other.gameObject);
 
-        enemy.TakeDamage(PlayerStats.Instance.GetDamage());
+        enemy.TakeDamage(currentDamage, currentElement);
         if (remainingPenetration > 0)
         {
             remainingPenetration--;

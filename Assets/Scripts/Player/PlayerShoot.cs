@@ -90,11 +90,6 @@ public class PlayerShoot : MonoBehaviour
                 Mathf.Atan2(bulletDir.y, bulletDir.x) * Mathf.Rad2Deg - 90f
             );
 
-            // GameObject bullet = Instantiate(
-            //     bulletPrefab,
-            //     spawnPos,
-            //     bulletRot
-            // );
             GameObject pooledBullet = ObjectPooler.Instance.GetFromPool(
                 bulletPrefab,
                 spawnPos,
@@ -103,6 +98,11 @@ public class PlayerShoot : MonoBehaviour
 
             if (pooledBullet != null)
             {
+                Bullet proj = pooledBullet.GetComponent<Bullet>();
+                if (proj != null)
+                {
+                    proj.Initialize(ElementalType.Physical, PlayerStats.Instance.GetDamage());
+                }
                 Rigidbody2D rb = pooledBullet.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
