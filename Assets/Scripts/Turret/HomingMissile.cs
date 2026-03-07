@@ -158,11 +158,12 @@ public class HomingMissile : MonoBehaviour
 
     Transform FindNewTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        // GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var enemies = EnemyManager.Instance.ActiveEnemies;
         float closestDistance = Mathf.Infinity;
         Transform closestEnemy = null;
 
-        foreach (GameObject enemy in enemies)
+        foreach (HealthEnemy enemy in enemies)
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance < closestDistance)

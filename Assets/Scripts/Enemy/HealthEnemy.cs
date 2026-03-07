@@ -33,6 +33,8 @@ public class HealthEnemy : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
+
+        EnemyManager.Instance?.RegisterEnemy(this);
     }
 
     public void ApplyHealthMultiplier(float multiplier)
@@ -74,6 +76,8 @@ public class HealthEnemy : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+
+        EnemyManager.Instance?.UnregisterEnemy(this);
 
         int finalExp = expReward;
         if (LevelManager.Instance != null)

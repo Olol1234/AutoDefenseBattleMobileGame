@@ -127,23 +127,26 @@ public class PlayerShoot : MonoBehaviour
 
     GameObject GetNearestEnemyInRange()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        // GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var enemies = EnemyManager.Instance.ActiveEnemies;
 
         GameObject closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach (GameObject enemy in enemies)
+        foreach (HealthEnemy enemy in enemies)
         {
-            Collider2D enemyCol = enemy.GetComponent<Collider2D>();
-            if (enemyCol == null) continue;
+            // Collider2D enemyCol = enemy.GetComponent<Collider2D>();
+            // if (enemyCol == null) continue;
+            if (enemy == null || !enemy.gameObject.activeInHierarchy) continue;
 
-            Vector2 closestPoint = enemyCol.ClosestPoint(firePoint.position);
-            float distance = Vector2.Distance(firePoint.position, closestPoint);
+            // Vector2 closestPoint = enemyCol.ClosestPoint(firePoint.position);
+            // float distance = Vector2.Distance(firePoint.position, closestPoint);
+            float distance = Vector2.Distance(firePoint.position, enemy.transform.position);
 
             if (distance <= shootRange && distance < closestDistance)
             {
                 closestDistance = distance;
-                closestEnemy = enemy;
+                closestEnemy = enemy.gameObject;
             }
         }
 

@@ -231,13 +231,16 @@ public class LaserTurretBrain : MonoBehaviour
 
     Transform FindClosestEnemy()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyLayer);
+        // Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyLayer);
+        var enemies = EnemyManager.Instance.ActiveEnemies;
 
         float minDist = Mathf.Infinity;
         Transform closest = null;
 
         foreach (var enemy in enemies)
         {
+            if (enemy == null || !enemy.gameObject.activeInHierarchy) continue;
+
             float dist = Vector2.Distance(transform.position, enemy.transform.position);
             if (dist < minDist)
             {

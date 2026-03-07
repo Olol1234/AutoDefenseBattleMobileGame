@@ -160,13 +160,30 @@ public class HomingMissileBrain : MonoBehaviour
     void SelectTarget()
     {
         currentTarget = null;
+        var enemies = EnemyManager.Instance.ActiveEnemies;
 
-        foreach (var enemy in enemiesInRange)
+        // foreach (var enemy in enemiesInRange)
+        // {
+        //     if (IsVisibleOnScreen(enemy.position))
+        //     {
+        //         currentTarget = enemy;
+        //         return;
+        //     }
+        // }
+        float closestDist = Mathf.Infinity;
+
+        foreach (var enemy in enemies)
         {
-            if (IsVisibleOnScreen(enemy.position))
+            if (enemy == null || !enemy.gameObject.activeInHierarchy) continue;
+
+            if (IsVisibleOnScreen(enemy.transform.position))
             {
-                currentTarget = enemy;
-                return;
+                float dist = Vector2.Distance(transform.position, enemy.transform.position);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    currentTarget = enemy.transform;
+                }
             }
         }
     }
