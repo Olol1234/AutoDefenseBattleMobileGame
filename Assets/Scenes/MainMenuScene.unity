@@ -1191,6 +1191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16c84ab1a814634a987bc1c7e1ff17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootAudioCooldown: 0.05
   sfxSource: {fileID: 212643388}
   clickSound: {fileID: 8300000, guid: 02f71f42955b7924182f043b50594dae, type: 3}
   cancelSound: {fileID: 8300000, guid: 25995d26de3f0bf46aba2cabd8db7cd0, type: 3}
@@ -2800,7 +2801,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1501502025}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.07894728}
+  m_AnchorMin: {x: 0, y: 0.078947365}
   m_AnchorMax: {x: 1, y: 0.99999994}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -4374,7 +4375,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 452164459}
   m_HandleRect: {fileID: 452164458}
   m_Direction: 2
-  m_Value: 0.999999
+  m_Value: 1
   m_Size: 0.92105263
   m_NumberOfSteps: 0
   m_OnValueChanged:
