@@ -16,6 +16,7 @@ public class LaserTurretBrain : MonoBehaviour
     public float laserCooldown = 4f;
     public float laserDPS = 50f;
     public float maxLaserLength = 150f; // safety cap
+    public ElementalType laserElement = ElementalType.Energy;
 
     [Header("Targeting")]
     public float range = 14f;
@@ -161,7 +162,7 @@ public class LaserTurretBrain : MonoBehaviour
                 if (enemy != null)
                 {
                     // enemy.TakeDamage(laserDPS * Time.deltaTime);
-                    enemy.TakeDamage(GetDamage() * Time.deltaTime);
+                    enemy.TakeDamage(GetDamage() * Time.deltaTime, laserElement);
                 }
             }
             lineRenderer.SetPosition(0, start);
@@ -193,7 +194,7 @@ public class LaserTurretBrain : MonoBehaviour
                     HealthEnemy enemy = hit.collider.GetComponent<HealthEnemy>();
                     if (enemy != null)
                     {
-                        enemy.TakeDamage(GetDamage() * 0.65f * Time.deltaTime);
+                        enemy.TakeDamage(GetDamage() * 0.65f * Time.deltaTime, laserElement);
                     }
                 }
 
@@ -261,7 +262,7 @@ public class LaserTurretBrain : MonoBehaviour
             var enemy = hit.collider.GetComponent<HealthEnemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(GetDamage() * sideDamageMultiplier * Time.deltaTime);
+                enemy.TakeDamage(GetDamage() * sideDamageMultiplier * Time.deltaTime, laserElement);
             }
         }
 

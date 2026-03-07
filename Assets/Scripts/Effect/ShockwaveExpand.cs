@@ -62,7 +62,7 @@ public class ShockwaveExpand : MonoBehaviour
         if (enemyHealth == null) return;
         if (affectedEnemies.Contains(enemyHealth)) return;
         affectedEnemies.Add(enemyHealth);
-        enemyHealth.TakeDamage(damage * 0.7f);
+        enemyHealth.TakeDamage(damage * 0.7f, ElementalType.Fire);
     }
 
 }

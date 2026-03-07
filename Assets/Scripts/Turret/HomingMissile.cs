@@ -9,6 +9,7 @@ public class HomingMissile : MonoBehaviour
     private float currentLifetime;
     public float turnSpeed = 180f;
     public GameObject hitEffectPrefab;
+    public ElementalType missileElement = ElementalType.Fire;
 
     private Transform target;
     private Rigidbody2D rb;
@@ -130,7 +131,8 @@ public class HomingMissile : MonoBehaviour
             HealthEnemy enemyHealth = other.GetComponent<HealthEnemy>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damage);
+                // enemyHealth.TakeDamage(damage);
+                enemyHealth.TakeDamage(damage, missileElement);
             }
             if (hitEffectPrefab != null)
             {
