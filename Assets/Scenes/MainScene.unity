@@ -7330,9 +7330,12 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 161831838943640665, guid: 330d21716e37b79439ed9ab81ff87fe6, type: 3}
       startTime: 3
       weight: 0.5
+    - enemyPrefab: {fileID: 5708900262277993476, guid: 57922f042591630428ba3f5cc6443b78, type: 3}
+      startTime: 3
+      weight: 0.5
     stageHealthMultiplier: 1
     stageSpeedMultiplier: 1
-    stageSpawnRateMultiplier: 1
+    stageSpawnRateMultiplier: 1.3
   - stageNumber: 2
     spawnTable:
     - enemyPrefab: {fileID: 6423019300186317213, guid: 77967f1f0f429034aa8e24d623260ae6, type: 3}
