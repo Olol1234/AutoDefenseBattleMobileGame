@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour
 {
     public Camera cam;
+    public Transform backgroundTransform;
 
     [Header("Zoom Settings")]
     public float zoomSpeed = 1.5f;
@@ -44,6 +45,9 @@ public class CameraController : MonoBehaviour
 
         float targetY = baseY + (targetSize - baseSize);
 
+        Vector3 startScale = backgroundTransform.localScale;
+        Vector3 targetScale = startScale * (targetSize / startSize);
+
         float t = 0f;
 
         while (t < 1f)
@@ -60,6 +64,8 @@ public class CameraController : MonoBehaviour
                 cam.transform.position.z
             );
 
+            backgroundTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
             yield return null;
         }
 
@@ -69,5 +75,6 @@ public class CameraController : MonoBehaviour
             targetY,
             cam.transform.position.z
         );
+        backgroundTransform.localScale = targetScale;
     }
 }
