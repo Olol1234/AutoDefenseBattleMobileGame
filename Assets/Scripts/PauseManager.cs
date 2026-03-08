@@ -5,6 +5,7 @@ public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance;
     public static bool IsPaused = false;
+    public static bool IsSystemPaused = false;
 
     public GameObject pausePanel;
 
@@ -30,6 +31,8 @@ public class PauseManager : MonoBehaviour
 
     public void TogglePause()
     {
+        if (IsSystemPaused) return;
+
         if (IsPaused)
         {
             Resume();
@@ -56,10 +59,12 @@ public class PauseManager : MonoBehaviour
         // if (pausePanel != null)
         //     pausePanel.SetActive(true);
         GameInput.GameplayEnabled = false;
+        // if (pausePanel != null) pausePanel.SetActive(true);
     }
 
     public void Resume()
     {
+        if (IsSystemPaused) return;
         IsPaused = false;
         Time.timeScale = previousGameSpeed;
         Rigidbody2D[] allBodies = FindObjectsByType<Rigidbody2D>(FindObjectsSortMode.None);
@@ -69,6 +74,19 @@ public class PauseManager : MonoBehaviour
         if (pausePanel != null)
             pausePanel.SetActive(false);
         GameInput.GameplayEnabled = true;
+    }
+
+    public void SystemPause()
+    {
+        IsSystemPaused = true;
+        Pause();
+        if (pausePanel != null) pausePanel.SetActive(false);
+    }
+
+    public void SystemResume()
+    {
+        IsSystemPaused = false;
+        Resume();
     }
 
     public void QuitToMainMenu()
