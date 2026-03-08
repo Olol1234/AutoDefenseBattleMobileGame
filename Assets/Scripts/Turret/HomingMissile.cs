@@ -40,7 +40,13 @@ public class HomingMissile : MonoBehaviour
 
         // Safety resets
         transform.localScale = new Vector3(0.1f, 0.25f, 0f); 
-        if (rb != null) rb.linearVelocity = Vector2.zero;
+        // if (rb != null) rb.linearVelocity = Vector2.zero;
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.simulated = true; 
+            rb.linearVelocity = transform.up * speed; 
+        }
     }
 
     void Update()
