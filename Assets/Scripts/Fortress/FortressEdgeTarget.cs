@@ -64,7 +64,7 @@ public class FortressEdgeTargets : MonoBehaviour
         // Safety: if filtering removed everything, fall back to unfiltered points
         if (cachedPoints.Count == 0)
         {
-            Debug.LogWarning("FortressEdgeTargets: No points after filtering. Disabling filters fallback.");
+            // Debug.LogWarning("FortressEdgeTargets: No points after filtering. Disabling filters fallback.");
             onlyVisibleInMainCamera = false;
             onlyAboveFortressCenter = false;
 
