@@ -1,0 +1,62 @@
+using UnityEngine;
+
+public class ZigZagMovement : MonoBehaviour
+{
+    [Header("Movement Settings")]
+    public float verticalSpeed = 2f;
+    public float horizontalSpeed = 3f;
+    [Header("Rotation Settings")]
+    public float rotationSpeed = 10f;
+    public float leanAngle = 15f;
+    
+    private int directionX = 1; // 1 for Right, -1 for Left
+    private float screenLimitX;
+
+    void Start()
+    {
+        CalculateScreenEdges();
+    }
+
+    void CalculateScreenEdges()
+    {
+        // Get the horizontal edge based on Camera Zoom
+        Camera mainCam = Camera.main;
+        float screenHeight = mainCam.orthographicSize * 2f;
+        float screenWidth = screenHeight * mainCam.aspect;
+        
+        // Subtract a small offset (0.5f) so the enemy doesn't half-disappear
+        screenLimitX = (screenWidth / 2f) - 0.5f;
+    }
+
+    void Update()
+    {
+        if (PauseManager.IsPaused) return;
+
+        // Downward Movement
+        float moveY = -verticalSpeed * Time.deltaTime;
+        // Horizontal Zig-Zag Movement
+        float moveX = horizontalSpeed * directionX * Time.deltaTime;
+
+        transform.Translate(new Vector3(moveX, moveY, 0), Space.World);
+
+        // Rotate to Lean in the Direction of Movement
+        // float targetAngle = directionX * leanAngle;
+        // Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+        // transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // spinning
+        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime, Space.Self);
+
+        // Check for Camera Edges
+        if (transform.position.x >= screenLimitX)
+        {
+            directionX = -1;
+            transform.position = new Vector3(screenLimitX, transform.position.y, 0);
+        }
+        else if (transform.position.x <= -screenLimitX)
+        {
+            directionX = 1;
+            transform.position = new Vector3(-screenLimitX, transform.position.y, 0);
+        }
+    }
+}
