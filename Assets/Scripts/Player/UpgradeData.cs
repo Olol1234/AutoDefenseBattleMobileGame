@@ -44,23 +44,28 @@ public class UpgradeData
 
             case UpgradeType.HomingMissileTurretCooldown:
                 HomingMissileBrain.Instance.lowerCooldownFactor += 0.1f;
+                HomingMissileUpgradeAnim.Instance.PlayUpgradeAnimation();
                 break;
             
             case UpgradeType.HomingMissileTurretDamagePercent:
                 HomingMissileBrain.Instance.damageMultiplier *= 1.2f;
+                HomingMissileUpgradeAnim.Instance.PlayUpgradeAnimation();
                 break;
 
             case UpgradeType.HomingMissileTurretExtraMissile:
                 HomingMissileBrain.Instance.extraMissile += 1;
+                HomingMissileUpgradeAnim.Instance.PlayUpgradeAnimation();
                 break;
 
             case UpgradeType.HomingMissileTurretShockwaveOnImpact:
                 HomingMissileBrain.Instance.hasShockwaveOnImpact = true;
+                HomingMissileUpgradeAnim.Instance.PlayUpgradeAnimation();
                 UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.HomingMissileTurretShockwaveOnImpact);
                 break;
 
             case UpgradeType.HomingMissileTurretMiniMissiles:
                 HomingMissileBrain.Instance.hasMiniMissiles = true;
+                HomingMissileUpgradeAnim.Instance.PlayUpgradeAnimation();
                 UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.HomingMissileTurretMiniMissiles);
                 break;
 

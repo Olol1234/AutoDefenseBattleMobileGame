@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -198,6 +199,26 @@ public class HomingMissileBrain : MonoBehaviour
 
         firePoint.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
+
+    // public void PlayUpgradeAnimation()
+    // {
+    //     SpriteRenderer sr = GetComponent<SpriteRenderer>();
+    //     Animator anim = GetComponent<Animator>();
+
+    //     if (sr != null && anim != null)
+    //     {
+    //         sr.enabled = true; 
+            
+    //         anim.SetTrigger("PlayUpgrade");             
+    //         StartCoroutine(HideAfterDelay(sr, 0.5f)); 
+    //     }
+    // }
+
+    // private IEnumerator HideAfterDelay(SpriteRenderer sr, float delay)
+    // {
+    //     yield return new WaitForSecondsRealtime(delay);
+    //     sr.enabled = false;
+    // }
 
     // ---------------- CAMERA VISIBILITY ----------------
 
