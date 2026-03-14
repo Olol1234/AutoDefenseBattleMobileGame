@@ -28,6 +28,14 @@ public class PlayerProfile : MonoBehaviour
     public float laserTurretDuration;
     public int laserTurretDurationLevel;
 
+    // Base stats for shotgun turret
+    public bool shotgunTurretUnlocked;
+    public float shotgunTurretBaseDamage;
+    public int shotgunTurretDamageLevel;
+    public float shotgunTurretCooldown;
+    public int shotgunTurretCooldownLevel;
+
+
     public bool IsLoaded { get; private set; } = false;
     // Event for UI + systems
     public static System.Action OnProfileLoaded;
@@ -76,6 +84,12 @@ public class PlayerProfile : MonoBehaviour
         laserTurretCooldownLevel = data.laserTurretCooldownLevel;
         laserTurretDuration = data.laserTurretDuration;
         laserTurretDurationLevel = data.laserTurretDurationLevel;
+        // SHOTGUN TURRET DATA
+        shotgunTurretUnlocked = data.shotgunTurretUnlocked;
+        shotgunTurretBaseDamage = data.shotgunTurretBaseDamage;
+        shotgunTurretDamageLevel = data.shotgunTurretDamageLevel;
+        shotgunTurretCooldown = data.shotgunTurretCooldown;
+        shotgunTurretCooldownLevel = data.shotgunTurretCooldownLevel;
 
         IsLoaded = true;
 
@@ -108,6 +122,12 @@ public class PlayerProfile : MonoBehaviour
         data.laserTurretCooldownLevel = laserTurretCooldownLevel;
         data.laserTurretDuration = laserTurretDuration;
         data.laserTurretDurationLevel = laserTurretDurationLevel;
+        // SHOTGUN TURRET DATA
+        data.shotgunTurretUnlocked = shotgunTurretUnlocked;
+        data.shotgunTurretBaseDamage = shotgunTurretBaseDamage;
+        data.shotgunTurretDamageLevel = shotgunTurretDamageLevel;
+        data.shotgunTurretCooldown = shotgunTurretCooldown;
+        data.shotgunTurretCooldownLevel = shotgunTurretCooldownLevel;
 
         SaveManager.Instance.Save();
     }

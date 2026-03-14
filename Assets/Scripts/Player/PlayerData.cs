@@ -24,4 +24,11 @@ public class PlayerData
     public int laserTurretCooldownLevel = 1;
     public float laserTurretDuration = 2.5f;
     public int laserTurretDurationLevel = 1;
+
+    // SHOTGUN TURRET DATA
+    public bool shotgunTurretUnlocked = false;
+    public float shotgunTurretBaseDamage = 80f;
+    public int shotgunTurretDamageLevel = 1;
+    public float shotgunTurretCooldown = 6f;
+    public int shotgunTurretCooldownLevel = 1;
 }
