@@ -49,6 +49,16 @@ public class Bullet : MonoBehaviour
         if (hitEnemies.Contains(other.gameObject)) return;
         hitEnemies.Add(other.gameObject);
 
+        // Apply knockback
+        Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+        float knockbackForce = PlayerStats.Instance.GetKnockbackForce();
+        enemy.RequestKnockback(knockbackDirection, knockbackForce);
+        // var normal = other.GetComponent<EnemyAimFortress>();
+        // if (normal != null) normal.ApplyKnockback(knockbackDirection, knockbackForce);
+        // var zigzag = other.GetComponent<ZigZagMovement>();
+        // if (zigzag != null) zigzag.ApplyKnockback(knockbackDirection, knockbackForce);
+
+        // Take damage
         enemy.TakeDamage(currentDamage, currentElement);
         if (remainingPenetration > 0)
         {
