@@ -9,6 +9,7 @@ public class HealthEnemy : MonoBehaviour
     private float currentHealth;
     public int expReward = 25;
     private bool isDead = false;
+    private IKnockbackable knockbackComponent;
 
     [HideInInspector] public GameObject myPrefab;
 
@@ -35,6 +36,16 @@ public class HealthEnemy : MonoBehaviour
         }
 
         EnemyManager.Instance?.RegisterEnemy(this);
+    }
+
+    void Awake()
+    {
+        knockbackComponent = GetComponent<IKnockbackable>();
+    }
+
+    public void RequestKnockback(Vector2 direction, float force)
+    {
+        knockbackComponent?.ApplyKnockback(direction, force);
     }
 
     public void ApplyHealthMultiplier(float multiplier)
