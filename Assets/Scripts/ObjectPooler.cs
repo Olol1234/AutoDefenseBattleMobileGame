@@ -44,6 +44,11 @@ public class ObjectPooler : MonoBehaviour
             if (enemyHealthScript != null) {
                 enemyHealthScript.myPrefab = prefab;
             }
+
+            ShotgunPellet pelletScript = obj.GetComponent<ShotgunPellet>();
+            if (pelletScript != null) {
+                pelletScript.myPrefab = prefab;        
+            }
         }
         else
         {
