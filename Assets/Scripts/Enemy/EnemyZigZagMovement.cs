@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class ZigZagMovement : MonoBehaviour
+public class ZigZagMovement : MonoBehaviour, IKnockbackable
 {
     [Header("Movement Settings")]
     public float verticalSpeed = 2f;
     public float horizontalSpeed = 3f;
+    private Vector2 knockbackVelocity;
     [Header("Rotation Settings")]
     public float rotationSpeed = 10f;
     public float leanAngle = 15f;
@@ -32,12 +33,17 @@ public class ZigZagMovement : MonoBehaviour
     {
         if (PauseManager.IsPaused) return;
 
-        // Downward Movement
-        float moveY = -verticalSpeed * Time.deltaTime;
-        // Horizontal Zig-Zag Movement
-        float moveX = horizontalSpeed * directionX * Time.deltaTime;
+        // // Downward Movement
+        // float moveY = -verticalSpeed * Time.deltaTime;
+        // // Horizontal Zig-Zag Movement
+        // float moveX = horizontalSpeed * directionX * Time.deltaTime;
 
-        transform.Translate(new Vector3(moveX, moveY, 0), Space.World);
+        // transform.Translate(new Vector3(moveX, moveY, 0), Space.World);
+
+        Vector3 movement = new Vector3(horizontalSpeed * directionX, -verticalSpeed, 0) * Time.deltaTime;
+        // transform.Translate(movement + (knockbackVelocity * Time.deltaTime), Space.World);
+        transform.Translate(movement + (new Vector3(knockbackVelocity.x, knockbackVelocity.y, 0) * Time.deltaTime), Space.World);
+        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, Time.deltaTime * 1f); // Smoothly reduce knockback over time
 
         // Rotate to Lean in the Direction of Movement
         // float targetAngle = directionX * leanAngle;
@@ -59,4 +65,10 @@ public class ZigZagMovement : MonoBehaviour
             transform.position = new Vector3(-screenLimitX, transform.position.y, 0);
         }
     }
+
+    public void ApplyKnockback(Vector2 pushDirection, float force)
+    {
+        knockbackVelocity += pushDirection.normalized * force;
+    }
+
 }

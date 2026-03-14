@@ -1,10 +1,12 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class EnemyAimFortress : MonoBehaviour
+public class EnemyAimFortress : MonoBehaviour, IKnockbackable
 {
     public float speed = 2.0f;
     public float stopDistance = 0.05f;
+    private Vector2 knockbackVelocity;
+    private float knockbackResist = 1f;
 
     Rigidbody2D rb;
     Vector2 targetPoint;
@@ -54,9 +56,16 @@ public class EnemyAimFortress : MonoBehaviour
         }
 
         Vector2 dir = (targetPoint - pos).normalized;
-        // rb.linearVelocity = dir * (speed* Time.timeScale);
-        rb.linearVelocity = dir * speed;
-        // Debug.Log($"Enemy moving with speed: {speed}");
+        // rb.linearVelocity = dir * speed;
+        Vector2 movementVelocity = dir * speed;
+
+        rb.linearVelocity = movementVelocity + knockbackVelocity;
+        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackResist * Time.fixedDeltaTime);
+    }
+
+    public void ApplyKnockback(Vector2 pushDirection, float force)
+    {
+        knockbackVelocity += pushDirection.normalized * force;
     }
 
     // Optional: visualize chosen target in Scene view
