@@ -152,6 +152,28 @@ public class UpgradeManager : MonoBehaviour
             UpgradeRarity.Rare
         ));
 
+        allUpgrades.Add(new UpgradeData(
+            UpgradeType.ShotgunTurret,
+            "Shotgun Turret",
+            "Deploy a Shotgun Turret to assist you in battle",
+            UpgradeRarity.Common
+        ));
+
+        allUpgrades.Add(new UpgradeData(
+            UpgradeType.ShotgunTurretCooldown,
+            "-10% Turret Cooldown",
+            "Reduce Shotgun Turret's cooldown by 10%",
+            UpgradeRarity.Common
+        ));
+
+
+        allUpgrades.Add(new UpgradeData(
+            UpgradeType.ShotgunTurretDamagePercent,
+            "+20% Turret Damage",
+            "Increase Shotgun Turret's damage by 20%",
+            UpgradeRarity.Common
+        ));
+
     }
 
     bool IsTurretUnlocked(UpgradeType type)
@@ -163,6 +185,9 @@ public class UpgradeManager : MonoBehaviour
 
             case UpgradeType.LaserTurret:
                 return PlayerProfile.Instance.laserTurretUnlocked;
+
+            case UpgradeType.ShotgunTurret:
+                return PlayerProfile.Instance.shotgunTurretUnlocked;
         }
 
         return true;
@@ -177,6 +202,9 @@ public class UpgradeManager : MonoBehaviour
 
             case UpgradeType.LaserTurret:
                 return LaserTurretBrain.Instance != null;
+
+            case UpgradeType.ShotgunTurret:
+                return ShotgunBrain.Instance != null;
         }
 
         return false;
@@ -200,6 +228,12 @@ public class UpgradeManager : MonoBehaviour
                 type == UpgradeType.LaserTurretDuration ||
                 type == UpgradeType.LaserTurretSweepingLaser ||
                 type == UpgradeType.LaserTurretSideLaser;
+        }
+
+        if (turretType == UpgradeType.ShotgunTurret)
+        {
+            return type == UpgradeType.ShotgunTurretCooldown ||
+                type == UpgradeType.ShotgunTurretDamagePercent;
         }
 
         return false;
@@ -239,6 +273,17 @@ public class UpgradeManager : MonoBehaviour
                 if (!unlocked) continue;
                 if (unlocked && !spawned && upgrade.type != UpgradeType.LaserTurret) continue;
                 if (spawned && upgrade.type == UpgradeType.LaserTurret) continue;
+            }
+
+            if (upgrade.type == UpgradeType.ShotgunTurret ||
+                IsTurretUpgrade(upgrade.type, UpgradeType.ShotgunTurret))
+            {
+                bool unlocked = IsTurretUnlocked(UpgradeType.ShotgunTurret);
+                bool spawned = ShotgunBrain.Instance != null;
+
+                if (!unlocked) continue;
+                if (unlocked && !spawned && upgrade.type != UpgradeType.ShotgunTurret) continue;
+                if (spawned && upgrade.type == UpgradeType.ShotgunTurret) continue;
             }
 
             if (uniqueUpgradesTaken.Contains(upgrade.type))
