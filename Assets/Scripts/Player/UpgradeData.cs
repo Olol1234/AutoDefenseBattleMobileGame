@@ -98,6 +98,18 @@ public class UpgradeData
                 LaserTurretBrain.Instance.hasSideLaser = true;
                 UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.LaserTurretSideLaser);
                 break;
+
+            case UpgradeType.ShotgunTurret:
+                TurretManager.Instance.SpawnTurret(TurretType.ShotgunTurret);
+                break;
+
+            case UpgradeType.ShotgunTurretCooldown:
+                ShotgunBrain.Instance.lowerCooldownFactor += 0.1f;
+                break;
+
+            case UpgradeType.ShotgunTurretDamagePercent:
+                ShotgunBrain.Instance.damageMultiplier *= 1.2f;
+                break;
         }
     }
 
