@@ -12,6 +12,7 @@ public class ZigZagMovement : MonoBehaviour, IKnockbackable
     
     private int directionX = 1; // 1 for Right, -1 for Left
     private float screenLimitX;
+    [SerializeField] private float knockbackResist = 1f;
 
     void Start()
     {
@@ -33,17 +34,10 @@ public class ZigZagMovement : MonoBehaviour, IKnockbackable
     {
         if (PauseManager.IsPaused) return;
 
-        // // Downward Movement
-        // float moveY = -verticalSpeed * Time.deltaTime;
-        // // Horizontal Zig-Zag Movement
-        // float moveX = horizontalSpeed * directionX * Time.deltaTime;
-
-        // transform.Translate(new Vector3(moveX, moveY, 0), Space.World);
-
         Vector3 movement = new Vector3(horizontalSpeed * directionX, -verticalSpeed, 0) * Time.deltaTime;
         // transform.Translate(movement + (knockbackVelocity * Time.deltaTime), Space.World);
         transform.Translate(movement + (new Vector3(knockbackVelocity.x, knockbackVelocity.y, 0) * Time.deltaTime), Space.World);
-        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, Time.deltaTime * 1f); // Smoothly reduce knockback over time
+        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, Time.deltaTime * knockbackResist); // Smoothly reduce knockback over time
 
         // Rotate to Lean in the Direction of Movement
         // float targetAngle = directionX * leanAngle;

@@ -6,7 +6,7 @@ public class EnemyAimFortress : MonoBehaviour, IKnockbackable
     public float speed = 2.0f;
     public float stopDistance = 0.05f;
     private Vector2 knockbackVelocity;
-    private float knockbackResist = 1f;
+    [SerializeField] private float knockbackResist = 1f;
 
     Rigidbody2D rb;
     Vector2 targetPoint;
