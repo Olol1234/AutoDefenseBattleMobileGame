@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     public int extraBullets = 0;
     public int penetration = 0;
     public float attackSpeedMultiplier = 1f;
+    public int knockbackLevel = 0;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class PlayerStats : MonoBehaviour
         extraBullets = 0;
         penetration = 0;
         attackSpeedMultiplier = 1f;
+        knockbackLevel = 0;
     }
 
     public float GetDamage()
@@ -61,5 +63,10 @@ public class PlayerStats : MonoBehaviour
     public float GetPenetration()
     {
         return penetration;
+    }
+
+    public float GetKnockbackForce()
+    {
+        return knockbackLevel * 0.5f; // Each knockback level adds 0.5 units of force
     }
 }
