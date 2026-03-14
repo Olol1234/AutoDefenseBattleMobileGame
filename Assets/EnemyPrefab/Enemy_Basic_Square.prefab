@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.4
   stopDistance: 0.05
+  knockbackResist: 4
 --- !u!114 &5159659820462428197
 MonoBehaviour:
   m_ObjectHideFlags: 0
