@@ -1,5 +1,6 @@
 public enum TurretType
 {
     HomingMissileTurret,
-    LaserTurret
+    LaserTurret,
+    ShotgunTurret
 }
