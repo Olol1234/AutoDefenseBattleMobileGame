@@ -38,6 +38,10 @@ public class UpgradeData
                 stats.attackSpeedMultiplier *= 1.5f;
                 break;
 
+            case UpgradeType.Knockback:
+                stats.knockbackLevel += 1;
+                break;
+
             case UpgradeType.HomingMissileTurret:
                 TurretManager.Instance.SpawnTurret(TurretType.HomingMissileTurret);
                 break;

@@ -62,6 +62,13 @@ public class UpgradeManager : MonoBehaviour
         ));
 
         allUpgrades.Add(new UpgradeData(
+            UpgradeType.Knockback,
+            "+1 Knockback Level",
+            "Bullets apply more knockback to enemies",
+            UpgradeRarity.Rare
+        ));
+
+        allUpgrades.Add(new UpgradeData(
             UpgradeType.HomingMissileTurret,
             "Homing Missile Turret",
             "Deploy a Homing Missile Turret to assist you in battle",
