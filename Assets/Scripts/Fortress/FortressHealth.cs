@@ -31,7 +31,7 @@ public class FortressHealth : MonoBehaviour
         currentHealth -= amount;
 
         if (logDamage)
-            Debug.Log($"Fortress took {amount} damage. HP: {currentHealth}/{maxHealth}");
+            // Debug.Log($"Fortress took {amount} damage. HP: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
         {
