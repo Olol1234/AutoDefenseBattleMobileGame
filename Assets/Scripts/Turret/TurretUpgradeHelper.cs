@@ -66,16 +66,22 @@ public static class TurretUpgradeHelper
         switch (type)
         {
             case TurretType.HomingMissileTurret:
+                if (p.homingMissileTurretDamageLevel >= 100)
+                return false;
                 p.homingMissileTurretDamageLevel++;
                 p.homingMissileTurretBaseDamage += 100f;
                 break;
 
             case TurretType.LaserTurret:
+                if (p.laserTurretDamageLevel >= 100)
+                    return false;
                 p.laserTurretDamageLevel++;
                 p.laserTurretBaseDPS += 40f;
                 break;
 
             case TurretType.ShotgunTurret:
+                if (p.shotgunTurretDamageLevel >= 100)
+                    return false;
                 p.shotgunTurretDamageLevel++;
                 p.shotgunTurretBaseDamage += 400f;
                 break;
@@ -99,16 +105,22 @@ public static class TurretUpgradeHelper
         switch (type)
         {
             case TurretType.HomingMissileTurret:
+                if (p.homingMissileTurretCooldownLevel >= 50)
+                    return false;
                 p.homingMissileTurretCooldownLevel++;
                 p.homingMissileTurretCooldown *= 0.95f; // 5% faster
                 break;
 
             case TurretType.LaserTurret:
+                if (p.laserTurretCooldownLevel >= 50)
+                    return false;
                 p.laserTurretCooldownLevel++;
                 p.laserTurretCooldown *= 0.95f; // 5% faster
                 break;
 
             case TurretType.ShotgunTurret:
+                if (p.shotgunTurretCooldownLevel >= 50)
+                    return false;
                 p.shotgunTurretCooldownLevel++;
                 p.shotgunTurretCooldown *= 0.95f; // 5% faster
                 break;
