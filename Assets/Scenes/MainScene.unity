@@ -7406,7 +7406,7 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 6423019300186317213, guid: 77967f1f0f429034aa8e24d623260ae6, type: 3}
       startTime: 3
       weight: 1
-    - enemyPrefab: {fileID: 5944165661023187192, guid: c8b3cd07293d8e44a860e7e311125187, type: 3}
+    - enemyPrefab: {fileID: 8006571113957594592, guid: 20764f2e35657934987ae07c5370621e, type: 3}
       startTime: 3
       weight: 1
     stageHealthMultiplier: 1
