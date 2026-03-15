@@ -10,6 +10,7 @@ public class StageConfig
 
     [Header("Difficulty")]
     public float stageHealthMultiplier = 1f;
-    public float stageSpeedMultiplier = 1f;
+    // public float stageSpeedMultiplier = 1f;
     public float stageSpawnRateMultiplier = 1f;
+    public float stageDamageMultiplier = 1f;
 }
