@@ -185,6 +185,10 @@ public class LevelManager : MonoBehaviour
         {
             profile.laserTurretUnlocked = true;
         }
+        else if (profile.highestStageCleared >= 1)
+        {
+            profile.shotgunTurretUnlocked = true;
+        }
 
     }
 
