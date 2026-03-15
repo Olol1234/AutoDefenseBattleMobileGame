@@ -109,6 +109,8 @@ public class EnemyMelee : MonoBehaviour
         GameObject fortress = GameObject.FindGameObjectWithTag("Fortress");
         if (fortress != null)
         {
+            // if (LevelManager.Instance != null)
+            //     damage *= LevelManager.Instance.GetDifficultyMultiplier();
             fortress.GetComponent<FortressHealth>()?.TakeDamage((int)damage);
         }
     }
