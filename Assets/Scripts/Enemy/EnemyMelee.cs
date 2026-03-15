@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using NUnit.Framework;
 
-public class EnemyMelee : MonoBehaviour
+public class EnemyMelee : MonoBehaviour, IKnockbackable
 {
     [Header("Movement")]
     public float speed = 2.5f;
     public float stopDistanceOffset = 0.5f; // Very close to the fortress
+    private Vector2 knockbackVelocity;
+    [SerializeField] private float knockbackResist = 1f;
     
     [Header("Combat")]
     public float damage = 20f;
@@ -37,6 +40,11 @@ public class EnemyMelee : MonoBehaviour
         }
     }
 
+    public void ApplyKnockback(Vector2 pushDirection, float force)
+    {
+        knockbackVelocity += pushDirection.normalized * force;
+    }
+
     void FixedUpdate()
     {
         if (PauseManager.IsPaused) 
@@ -45,9 +53,16 @@ public class EnemyMelee : MonoBehaviour
             return;
         }
 
+        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackResist * Time.fixedDeltaTime);
+        if (knockbackVelocity.magnitude > 0.5f) 
+        {
+            isAttacking = false;
+            // Optional: Stop the Lunge Coroutine if it was running
+            StopAllCoroutines(); 
+        }
         if (!isAttacking)
         {
-            rb.linearVelocity = Vector2.down * speed;
+            rb.linearVelocity = (Vector2.down * speed) + knockbackVelocity;
 
             if (rb.position.y <= stopY)
             {
@@ -55,6 +70,10 @@ public class EnemyMelee : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
                 isAttacking = true;
             }
+        }
+        else
+        {
+            rb.linearVelocity = knockbackVelocity;
         }
     }
 

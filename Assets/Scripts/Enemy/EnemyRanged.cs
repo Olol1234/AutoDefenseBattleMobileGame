@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class EnemyRanged : MonoBehaviour
+public class EnemyRanged : MonoBehaviour, IKnockbackable
 {
     [Header("Movement")]
     public float speed = 2f;
-    public float stopDistanceOffset = 2f; 
+    public float stopDistanceOffset = 2f;
+    private Vector2 knockbackVelocity;
+    [SerializeField] private float knockbackResist = 1f;
     
     [Header("Combat")]
     public GameObject projectilePrefab;
@@ -47,6 +49,11 @@ public class EnemyRanged : MonoBehaviour
         }
     }
 
+    public void ApplyKnockback(Vector2 pushDirection, float force)
+    {
+        knockbackVelocity += pushDirection.normalized * force;
+    }
+
     void FixedUpdate()
     {
         if (PauseManager.IsPaused) 
@@ -58,7 +65,8 @@ public class EnemyRanged : MonoBehaviour
         if (!isAttacking)
         {
             // Simple downward movement
-            rb.linearVelocity = Vector2.down * speed;
+            rb.linearVelocity = (Vector2.down * speed) + knockbackVelocity;
+            knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackResist * Time.fixedDeltaTime);
 
             // Cheap float comparison instead of Distance math
             if (rb.position.y <= stopY)
