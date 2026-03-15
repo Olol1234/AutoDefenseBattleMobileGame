@@ -103,6 +103,16 @@ public class EnemySpawner : MonoBehaviour
             health.ApplyHealthMultiplier(config.stageHealthMultiplier);
         }
 
+        var damage = enemyGO.GetComponent<EnemyBoxExplode>();
+        if (damage != null)
+            damage.baseDamage = Mathf.RoundToInt(damage.baseDamage * config.stageDamageMultiplier);
+        var melee = enemyGO.GetComponent<EnemyMelee>();
+        if (melee != null)
+            melee.damage *= config.stageDamageMultiplier;
+        var ranged = enemyGO.GetComponent<EnemyRanged>();
+        if (ranged != null)
+            ranged.damage *= config.stageDamageMultiplier;
+
     }
 
     public void StopSpawning()
