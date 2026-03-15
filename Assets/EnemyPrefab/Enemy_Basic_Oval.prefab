@@ -51,6 +51,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 70
   expReward: 38
+  myPrefab: {fileID: 0}
+  weakness: 
+  resistance: 
+  immunity: 
 --- !u!114 &6470287581646051290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.4
   stopDistance: 0.05
+  knockbackResist: 7
 --- !u!114 &4230394863570188833
 MonoBehaviour:
   m_ObjectHideFlags: 0

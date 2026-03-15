@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910874c3a9b855a40903d3cac1e350fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 30000
-  expReward: 25
+  baseHealth: 57
+  expReward: 30
   myPrefab: {fileID: 0}
   weakness: 
   resistance: 
@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823e73beef96b964f85cab0e1b115d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 0.7
   stopDistanceOffset: 1.75
+  knockbackResist: 4
   damage: 1
   attackCooldown: 2.4
   lungeDistance: 0.45
