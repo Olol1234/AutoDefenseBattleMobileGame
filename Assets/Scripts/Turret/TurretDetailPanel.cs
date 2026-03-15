@@ -61,6 +61,22 @@ public class TurretDetailPanel : MonoBehaviour
             upgradeCooldownCostText.text = "Coin: " + cooldownCost;
         }
 
+        if (type == TurretType.ShotgunTurret)
+        {
+            damageRow.SetActive(true);
+            cooldownRow.SetActive(true);
+
+            turretNameText.text = "Shotgun Turret";
+            damageText.text = profile.shotgunTurretBaseDamage.ToString("F0");
+            nextDamageText.text = TurretUpgradeHelper.GetNextDamageValue(type).ToString("F0");
+            cooldownText.text = profile.shotgunTurretCooldown.ToString("F2");
+            nextCooldownText.text = TurretUpgradeHelper.GetNextCooldownValue(type).ToString("F2");
+            int cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
+            upgradeDamageCostText.text = "Coin: " + cost;
+            int cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
+            upgradeCooldownCostText.text = "Coin: " + cooldownCost;
+        }
+
     }
 
     public void Hide()
