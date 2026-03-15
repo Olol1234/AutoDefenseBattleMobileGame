@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class TurretDetailPanel : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class TurretDetailPanel : MonoBehaviour
     public TMP_Text upgradeDamageCostText;
     public TMP_Text upgradeCooldownCostText;
 
+    public GameObject maxUpgradePanel;
     public GameObject panelRoot;
 
     private TurretType currentTurretType;
@@ -103,7 +105,13 @@ public class TurretDetailPanel : MonoBehaviour
         bool success = TurretUpgradeHelper.UpgradeDamage(currentTurretType);
 
         if (success)
+        {
             Show(currentTurretType); // refresh UI
+        }
+        else
+        {
+            StartCoroutine(ShowMaxUpgradePanelRoutine());
+        }
 
         PlayerProfile.OnProfileLoaded?.Invoke();
     }
@@ -115,9 +123,24 @@ public class TurretDetailPanel : MonoBehaviour
         bool success = TurretUpgradeHelper.UpgradeCooldown(currentTurretType);
 
         if (success)
-            Show(currentTurretType);
+        {
+            Show(currentTurretType); // refresh UI
+        }
+        else
+        {
+            StartCoroutine(ShowMaxUpgradePanelRoutine());
+        }
 
         PlayerProfile.OnProfileLoaded?.Invoke();
+    }
+
+    private IEnumerator ShowMaxUpgradePanelRoutine()
+    {
+        maxUpgradePanel.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        maxUpgradePanel.SetActive(false);
     }
 
 }
