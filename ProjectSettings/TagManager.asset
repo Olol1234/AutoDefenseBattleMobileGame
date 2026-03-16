@@ -49,5 +49,8 @@ TagManager:
   - name: Effect
     uniqueID: 2126307527
     locked: 0
+  - name: Turret
+    uniqueID: 331613595
+    locked: 0
   m_RenderingLayers:
   - Default

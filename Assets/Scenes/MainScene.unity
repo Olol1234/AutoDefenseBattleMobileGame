@@ -7410,7 +7410,6 @@ MonoBehaviour:
       startTime: 3
       weight: 1
     stageHealthMultiplier: 1
-    stageSpeedMultiplier: 4
     stageSpawnRateMultiplier: 1
     stageDamageMultiplier: 1
   - stageNumber: 2
@@ -7422,7 +7421,6 @@ MonoBehaviour:
       startTime: 45
       weight: 0.35
     stageHealthMultiplier: 1.1
-    stageSpeedMultiplier: 1
     stageSpawnRateMultiplier: 1.2
     stageDamageMultiplier: 1
   - stageNumber: 3
@@ -7437,7 +7435,6 @@ MonoBehaviour:
       startTime: 20
       weight: 0.15
     stageHealthMultiplier: 1.5
-    stageSpeedMultiplier: 1
     stageSpawnRateMultiplier: 1.5
     stageDamageMultiplier: 1
   - stageNumber: 4
@@ -7449,7 +7446,6 @@ MonoBehaviour:
       startTime: 40
       weight: 0.8
     stageHealthMultiplier: 2
-    stageSpeedMultiplier: 1.2
     stageSpawnRateMultiplier: 1.5
     stageDamageMultiplier: 1
   - stageNumber: 5
@@ -7464,7 +7460,6 @@ MonoBehaviour:
       startTime: 100
       weight: 0.5
     stageHealthMultiplier: 2.2
-    stageSpeedMultiplier: 1.2
     stageSpawnRateMultiplier: 1.7
     stageDamageMultiplier: 1
 --- !u!4 &2091952663
