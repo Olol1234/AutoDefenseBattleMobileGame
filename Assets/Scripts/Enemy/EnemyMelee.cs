@@ -9,6 +9,8 @@ public class EnemyMelee : MonoBehaviour, IKnockbackable
     public float stopDistanceOffset = 0.5f; // Very close to the fortress
     private Vector2 knockbackVelocity;
     [SerializeField] private float knockbackResist = 1f;
+    private float screenLimitX;
+    private Camera mainCam;
     
     [Header("Combat")]
     public float damage = 20f;
@@ -28,6 +30,19 @@ public class EnemyMelee : MonoBehaviour, IKnockbackable
         isAttacking = false;
         attackTimer = 0f;
         CalculateStopPoint();
+    }
+
+    void Start()
+    {
+        mainCam = Camera.main;
+        UpdateScreenLimits();
+    }
+
+    void UpdateScreenLimits()
+    {
+        if (mainCam == null) return;
+        float screenWidth = (mainCam.orthographicSize * 2f) * mainCam.aspect;
+        screenLimitX = (screenWidth / 2f) - 0.4f;
     }
 
     void CalculateStopPoint()
@@ -63,6 +78,10 @@ public class EnemyMelee : MonoBehaviour, IKnockbackable
         if (!isAttacking)
         {
             rb.linearVelocity = (Vector2.down * speed) + knockbackVelocity;
+
+            UpdateScreenLimits();
+            float clampedX = Mathf.Clamp(rb.position.x, -screenLimitX, screenLimitX);
+            rb.position = new Vector2(clampedX, rb.position.y);
 
             if (rb.position.y <= stopY)
             {

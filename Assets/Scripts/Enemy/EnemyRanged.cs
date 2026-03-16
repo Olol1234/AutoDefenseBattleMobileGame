@@ -7,6 +7,8 @@ public class EnemyRanged : MonoBehaviour, IKnockbackable
     public float stopDistanceOffset = 2f;
     private Vector2 knockbackVelocity;
     [SerializeField] private float knockbackResist = 1f;
+    private float screenLimitX;
+    private Camera mainCam;
     
     [Header("Combat")]
     public GameObject projectilePrefab;
@@ -22,6 +24,19 @@ public class EnemyRanged : MonoBehaviour, IKnockbackable
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        mainCam = Camera.main;
+        UpdateScreenLimits();
+    }
+
+    void UpdateScreenLimits()
+    {
+        if (mainCam == null) return;
+        float screenWidth = (mainCam.orthographicSize * 2f) * mainCam.aspect;
+        screenLimitX = (screenWidth / 2f) - 0.4f;
     }
 
     void OnEnable()
@@ -67,6 +82,11 @@ public class EnemyRanged : MonoBehaviour, IKnockbackable
             // Simple downward movement
             rb.linearVelocity = (Vector2.down * speed) + knockbackVelocity;
             knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackResist * Time.fixedDeltaTime);
+
+            // Clamp X position within screen limits
+            UpdateScreenLimits();
+            float clampedX = Mathf.Clamp(rb.position.x, -screenLimitX, screenLimitX);
+            rb.position = new Vector2(clampedX, rb.position.y);
 
             // Cheap float comparison instead of Distance math
             if (rb.position.y <= stopY)
