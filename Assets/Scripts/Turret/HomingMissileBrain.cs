@@ -11,6 +11,8 @@ public class HomingMissileBrain : MonoBehaviour
     private float fireTimer;
     private List<Transform> enemiesInRange = new List<Transform>();
     private Transform currentTarget;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     public GameObject missilePrefab;
     [HideInInspector] public GameObject myPrefab;
@@ -36,6 +38,8 @@ public class HomingMissileBrain : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void InitFromProfile()
@@ -99,6 +103,13 @@ public class HomingMissileBrain : MonoBehaviour
         // if (currentTarget == null) return;
         if (enemiesInRange.Count == 0) return;
 
+        if (animator != null) {
+            // Force the animator to start from the Idle state
+            // animator.Play("Idle", 0, 0f); 
+            // Tell it to transition to the firing animation
+            animator.SetTrigger("Shoot");
+        }
+
         float startAngle = -(GetMissileCount() - 1) * spreadAngle * 0.5f;
 
         for (int i = 0; i < GetMissileCount(); i++)
@@ -127,6 +138,7 @@ public class HomingMissileBrain : MonoBehaviour
                 missile.SetTarget(target);
             }
         }
+        
         // Debug.Log("Missile Fired!");
     }
 
