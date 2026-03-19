@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TurretDetailPanel : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class TurretDetailPanel : MonoBehaviour
 
     public GameObject damageRow;
     public GameObject cooldownRow;
+    private int cost;
+    private int cooldownCost;
+    public Button upgradeDamageButton;
+    public Button upgradeCooldownButton;
 
     public TMP_Text turretNameText;
     public TMP_Text damageText;
@@ -41,9 +46,9 @@ public class TurretDetailPanel : MonoBehaviour
             nextDamageText.text = TurretUpgradeHelper.GetNextDamageValue(type).ToString("F0");
             cooldownText.text = profile.homingMissileTurretCooldown.ToString("F2");
             nextCooldownText.text = TurretUpgradeHelper.GetNextCooldownValue(type).ToString("F2");
-            int cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
+            cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
             upgradeDamageCostText.text = "Coin: " + cost;
-            int cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
+            cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
             upgradeCooldownCostText.text = "Coin: " + cooldownCost;
         }
 
@@ -57,9 +62,9 @@ public class TurretDetailPanel : MonoBehaviour
             nextDamageText.text = TurretUpgradeHelper.GetNextDamageValue(type).ToString("F0");
             cooldownText.text = profile.laserTurretCooldown.ToString("F2");
             nextCooldownText.text = TurretUpgradeHelper.GetNextCooldownValue(type).ToString("F2");
-            int cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
+            cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
             upgradeDamageCostText.text = "Coin: " + cost;
-            int cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
+            cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
             upgradeCooldownCostText.text = "Coin: " + cooldownCost;
         }
 
@@ -73,12 +78,22 @@ public class TurretDetailPanel : MonoBehaviour
             nextDamageText.text = TurretUpgradeHelper.GetNextDamageValue(type).ToString("F0");
             cooldownText.text = profile.shotgunTurretCooldown.ToString("F2");
             nextCooldownText.text = TurretUpgradeHelper.GetNextCooldownValue(type).ToString("F2");
-            int cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
+            cost = TurretUpgradeHelper.GetDamageUpgradeCost(type);
             upgradeDamageCostText.text = "Coin: " + cost;
-            int cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
+            cooldownCost = TurretUpgradeHelper.GetCooldownUpgradeCost(type);
             upgradeCooldownCostText.text = "Coin: " + cooldownCost;
         }
 
+        RefreshButtonStates();
+
+    }
+
+    void RefreshButtonStates()
+    {
+        var profile = PlayerProfile.Instance;
+
+        upgradeDamageButton.interactable = profile.coins >= cost;
+        upgradeCooldownButton.interactable = profile.coins >= cooldownCost;
     }
 
     public void Hide()
@@ -100,6 +115,9 @@ public class TurretDetailPanel : MonoBehaviour
 
     public void OnUpgradeDamageClicked()
     {
+        var profile = PlayerProfile.Instance;
+        if (profile.coins < cost) return;
+
         AudioManager.Instance.PlayClick();
 
         bool success = TurretUpgradeHelper.UpgradeDamage(currentTurretType);
@@ -118,6 +136,9 @@ public class TurretDetailPanel : MonoBehaviour
 
     public void OnUpgradeCooldownClicked()
     {
+        var profile = PlayerProfile.Instance;
+        if (profile.coins < cooldownCost) return;
+
         AudioManager.Instance.PlayClick();
 
         bool success = TurretUpgradeHelper.UpgradeCooldown(currentTurretType);
