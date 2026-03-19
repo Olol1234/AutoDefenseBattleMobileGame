@@ -4,7 +4,7 @@ using TMPro;
 public class TopNavManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text coinsText;
-    // private TMP_Text gemsText;
+    [SerializeField] private GameObject settingsPanel;
 
     void OnEnable()
     {
@@ -17,6 +17,16 @@ public class TopNavManager : MonoBehaviour
     void OnDisable()
     {
         PlayerProfile.OnProfileLoaded -= RefreshCoins;
+    }
+
+    public void OpenSettings()
+    {
+        if (settingsPanel != null)
+        {
+            settingsPanel.SetActive(true);
+            AudioManager.Instance.PlayClick();
+            Time.timeScale = 0f;
+        }
     }
 
     void RefreshCoins()
