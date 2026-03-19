@@ -23,6 +23,11 @@ public class EnemyBalloon : MonoBehaviour, IKnockbackable
         UpdateScreenLimits();
     }
 
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void UpdateScreenLimits()
     {
         if (mainCam == null) return;
@@ -65,6 +70,13 @@ public class EnemyBalloon : MonoBehaviour, IKnockbackable
                 transform.position + spawnOffset, 
                 Quaternion.identity
             );
+
+            // Can be optional
+            if(minion.TryGetComponent(out IKnockbackable k))
+            {
+                Vector2 burstDir = (minion.transform.position - transform.position).normalized;
+                k.ApplyKnockback(burstDir, 2f); 
+            }
         }
         
         // Return the Balloon itself to the pool
