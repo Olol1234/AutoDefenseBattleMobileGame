@@ -75,7 +75,7 @@ public class EnemyBalloon : MonoBehaviour, IKnockbackable
             if(minion.TryGetComponent(out IKnockbackable k))
             {
                 Vector2 burstDir = (minion.transform.position - transform.position).normalized;
-                k.ApplyKnockback(burstDir, 2f); 
+                k.ApplyKnockback(burstDir, 0.8f); 
             }
         }
         
