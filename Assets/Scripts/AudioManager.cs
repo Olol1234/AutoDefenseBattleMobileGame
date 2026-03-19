@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     [Header("Weapon Sounds")]
     public AudioClip playerShootSound;
     public AudioClip homingMissileSound;
-    // public AudioClip shotgunShootSound;
+    public AudioClip shotgunShootSound;
     // public AudioClip laserShootSound;
 
     [Header("Looping Sources")]
@@ -100,4 +100,11 @@ public class AudioManager : MonoBehaviour
                 laserLoopSource.UnPause();
         }
     }
+
+    public void PlayShotgunShoot()
+    {
+        sfxSource.pitch = Random.Range(0.9f, 1.1f); 
+        sfxSource.PlayOneShot(shotgunShootSound);
+    }
+
 }
