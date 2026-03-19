@@ -88,6 +88,9 @@ public class HealthEnemy : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
+        // Trigger special logic for balloon enemy
+        SendMessage("OnDeath", SendMessageOptions.DontRequireReceiver);
+
         EnemyManager.Instance?.UnregisterEnemy(this);
 
         int finalExp = expReward;
