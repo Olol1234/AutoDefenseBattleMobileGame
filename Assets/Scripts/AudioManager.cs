@@ -25,11 +25,22 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            float savedVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
+            sfxSource.volume = savedVolume;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetVolume(float volume)
+    {
+        sfxSource.volume = volume; 
+        
+        // Save it so the game remembers next time
+        PlayerPrefs.SetFloat("MasterVolume", volume);
     }
 
     public void PlayClick()
