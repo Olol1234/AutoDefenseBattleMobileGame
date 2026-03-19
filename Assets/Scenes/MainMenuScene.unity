@@ -7623,7 +7623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretType: 0
   turretDetailPanel: {fileID: 470800773}
-  requiredStage: 10
+  requiredStage: 2
   lockOverlay: {fileID: 1755288253}
 --- !u!1 &1058470858
 GameObject:
