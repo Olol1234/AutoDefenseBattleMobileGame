@@ -126,6 +126,8 @@ public class LaserTurretBrain : MonoBehaviour
         isFiring = true;
         lineRenderer.enabled = true;
 
+        AudioManager.Instance.PlayLaserLoop(true);
+
         if (hasSweepLaser && sweepLineRenderer != null)
             sweepLineRenderer.enabled = true;
 
@@ -145,9 +147,11 @@ public class LaserTurretBrain : MonoBehaviour
         {
             if (PauseManager.IsPaused)
             {
+                AudioManager.Instance.PlayLaserLoop(false);
                 yield return null;
                 continue;
             }
+            AudioManager.Instance.PlayLaserLoop(true);
 
             timer += Time.deltaTime;
 
@@ -204,6 +208,7 @@ public class LaserTurretBrain : MonoBehaviour
 
             yield return null;
         }
+        AudioManager.Instance.PlayLaserLoop(false);
 
         lineRenderer.enabled = false;
 
