@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2497,7 +2497,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 531400507}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.74
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11285,15 +11285,27 @@ MonoBehaviour:
     - m_Text: Physical
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: Fire
+    - m_Text: Energy
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: Energy
+    - m_Text: Fire
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1363606044}
+        m_TargetAssemblyTypeName: CharacterUpgradePanel, Assembly-CSharp
+        m_MethodName: ChangeElement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1322201806
 MonoBehaviour:
@@ -11477,6 +11489,7 @@ MonoBehaviour:
   damageNextText: {fileID: 1034074082}
   damageCostText: {fileID: 605888581}
   damageUpgradeButton: {fileID: 180209657}
+  elementDropdown: {fileID: 1322201805}
   hpValueText: {fileID: 1996298976}
   hpNextText: {fileID: 408442287}
   hpCostText: {fileID: 1454049263}
@@ -13713,7 +13726,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Physical
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
