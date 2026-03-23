@@ -57,6 +57,11 @@ public class LevelManager : MonoBehaviour
     {
         while (!PlayerProfile.Instance.IsLoaded)
             yield return null;
+        
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+        }
 
         PlayerStats.Instance.InitFromProfile();
 
