@@ -20,6 +20,7 @@ public class ShotgunBrain : MonoBehaviour
     private List<Transform> enemiesInRange = new List<Transform>();
     private Transform currentTarget;
     private Camera mainCam;
+    private Animator animator;
 
     [Header("Run Stats")]
     public float damageMultiplier = 1f;
@@ -33,6 +34,7 @@ public class ShotgunBrain : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -110,8 +112,13 @@ public class ShotgunBrain : MonoBehaviour
         // if (currentTarget == null) return;
         if (enemiesInRange.Count == 0) return;
 
+        animator.SetTrigger("Shoot"); 
+        AudioManager.Instance.PlayShotgunShoot();
+
         // Fan out the 2 cases slightly
         float startAngle = -(GetPelletCount() - 1) * spreadAngle * 0.5f;
+
+        AudioManager.Instance.PlayPlayerShoot();
 
         for (int i = 0; i < GetPelletCount(); i++)
         {
