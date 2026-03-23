@@ -29,7 +29,7 @@ public class CharacterUpgradePanel : MonoBehaviour
         PlayerProfile.OnProfileLoaded += HandleProfileLoaded;
         if (PlayerProfile.Instance != null && PlayerProfile.Instance.IsLoaded)
         {
-            elementDropdown.value = (int)PlayerProfile.Instance.elementalType;
+            elementDropdown.SetValueWithoutNotify((int)PlayerProfile.Instance.elementalType);
         }
         TryRefreshUI();
     }
@@ -41,6 +41,11 @@ public class CharacterUpgradePanel : MonoBehaviour
 
     void HandleProfileLoaded()
     {
+        if (elementDropdown != null && PlayerProfile.Instance != null)
+        {
+            int savedIndex = (int)PlayerProfile.Instance.elementalType;
+            elementDropdown.SetValueWithoutNotify(savedIndex);
+        }
         RefreshUI();
     }
 
