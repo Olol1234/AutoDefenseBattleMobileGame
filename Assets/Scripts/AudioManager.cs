@@ -40,6 +40,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void StopAllLoopingSounds()
+    {
+        if (laserLoopSource != null)
+        {
+            laserLoopSource.Stop();
+        }
+        // Add any other looping sources in the future
+    }
+
     public void SetVolume(float volume)
     {
         sfxSource.volume = volume; 

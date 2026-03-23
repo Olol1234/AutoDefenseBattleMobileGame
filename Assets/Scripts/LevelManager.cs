@@ -199,6 +199,7 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log("STAGE LOST!");
         Time.timeScale = 0f;
+        AudioManager.Instance.StopAllLoopingSounds();
         int coinsEarned = CalculateCoins(false);
         PlayerProfile.Instance.coins += coinsEarned;
         PlayerProfile.Instance.SaveToDisk();
@@ -221,6 +222,7 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log("STAGE CLEARED!");
         Time.timeScale = 0f;
+        AudioManager.Instance.StopAllLoopingSounds();
         CheckUnlocks();
         int coinsEarned = CalculateCoins(true);
         PlayerProfile.Instance.coins += coinsEarned;
