@@ -24,6 +24,10 @@ public class AudioManager : MonoBehaviour
     [Header("Looping Sources")]
     [SerializeField] private AudioSource laserLoopSource;
 
+    [Header("Music Sources")]
+    [SerializeField] private AudioSource musicSource;
+    public AudioClip ambientMenuMusic;
+
     private void Awake()
     {
         if (Instance == null)
@@ -38,6 +42,20 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void PlayMenuMusic()
+    {
+        if (musicSource.isPlaying && musicSource.clip == ambientMenuMusic) return;
+
+        musicSource.clip = ambientMenuMusic;
+        musicSource.loop = true; // Essential for that 7-min loop
+        musicSource.Play();
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
     }
 
     public void StopAllLoopingSounds()
