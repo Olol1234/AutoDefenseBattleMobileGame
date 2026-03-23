@@ -74,6 +74,7 @@ public class MainMenu : MonoBehaviour
             selectedStage++;
             UpdateUI();
         }
+        AudioManager.Instance.PlayClick();
     }
 
     public void PrevStage()
@@ -83,5 +84,6 @@ public class MainMenu : MonoBehaviour
             selectedStage--;
             UpdateUI();
         }
+        AudioManager.Instance.PlayClick();
     }
 }
