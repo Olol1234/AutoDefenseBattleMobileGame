@@ -11,6 +11,7 @@ public class PlayerProfile : MonoBehaviour
     public float baseDamage;
     public float baseFortressMaxHP;
     public float baseFireRate;
+    public ElementalType elementalType;
 
     // Base stats for homing missile turret
     public bool homingMissileTurretUnlocked;
@@ -70,6 +71,7 @@ public class PlayerProfile : MonoBehaviour
         baseDamage = data.baseDamage;
         baseFortressMaxHP = data.baseFortressMaxHP;
         baseFireRate = data.baseFireRate;
+        elementalType = data.elementalType;
         // HOMING MISSILE TURRET DATA
         homingMissileTurretUnlocked = data.homingMissileTurretUnlocked;
         homingMissileTurretBaseDamage = data.homingMissileTurretBaseDamage;
@@ -108,6 +110,7 @@ public class PlayerProfile : MonoBehaviour
         data.baseDamage = baseDamage;
         data.baseFortressMaxHP = baseFortressMaxHP;
         data.baseFireRate = baseFireRate;
+        data.elementalType = elementalType;
         // HOMING MISSILE TURRET DATA
         data.homingMissileTurretUnlocked = homingMissileTurretUnlocked;
         data.homingMissileTurretBaseDamage = homingMissileTurretBaseDamage;

@@ -8,6 +8,7 @@ public class PlayerData
     public float baseDamage = 20f;
     public float baseFortressMaxHP = 100f;
     public float baseFireRate = 1f;
+    public ElementalType elementalType = ElementalType.Physical;
 
     // HOMING MISSILE TURRET DATA
     public bool homingMissileTurretUnlocked = false;
