@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.45, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8832555897137561188}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 94e5f0dab22b80e40aa3e6a4330a9115, type: 3}
+  m_Sprite: {fileID: 2476580274048045573, guid: 1ae84474ebf02d64e9bd14eb84046068, type: 3}
   m_Color: {r: 1, g: 0.058820188, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   stopDistanceOffset: 3.5
+  knockbackResist: 1
   projectilePrefab: {fileID: 1457727665348219276, guid: 51572153cb15d034c8fb7b8d16f951c2, type: 3}
   fireRate: 2
   damage: 10

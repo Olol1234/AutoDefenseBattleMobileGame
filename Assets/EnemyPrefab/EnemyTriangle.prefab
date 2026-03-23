@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6700321164410897210}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 3e068f19e7cb8914a8db223a3b9c8379, type: 3}
+  m_Sprite: {fileID: 5430586502735498454, guid: b619748e4cf6e454ba0c9a2dc8c79728, type: 3}
   m_Color: {r: 0.735849, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 5708900262277993476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.68, y: 1.67, z: 0}
+  m_LocalPosition: {x: -1.493, y: -1.845, z: 0}
   m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -158,6 +158,7 @@ MonoBehaviour:
   horizontalSpeed: 1
   rotationSpeed: 20
   leanAngle: 15
+  knockbackResist: 1
 --- !u!114 &8963621230900292790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +206,7 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
