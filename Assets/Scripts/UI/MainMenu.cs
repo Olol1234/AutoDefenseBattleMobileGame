@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.PlayMenuMusic();
         selectedStage = PlayerPrefs.GetInt("SelectedStage", 1);
         UpdateUI();
     }
