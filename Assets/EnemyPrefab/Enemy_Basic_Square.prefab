@@ -52,9 +52,9 @@ MonoBehaviour:
   baseHealth: 50
   expReward: 25
   myPrefab: {fileID: 0}
-  weakness: 00000000
+  weakness: 
   resistance: 
-  immunity: 
+  immunity: 00000000
 --- !u!114 &7195163942560567752
 MonoBehaviour:
   m_ObjectHideFlags: 0
