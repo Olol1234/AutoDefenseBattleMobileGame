@@ -1,6 +1,6 @@
 public enum ElementalType
 {
-    None,
+    // None,
     Physical,
     Energy,
     Fire,
