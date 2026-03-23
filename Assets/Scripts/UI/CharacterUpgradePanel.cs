@@ -9,6 +9,9 @@ public class CharacterUpgradePanel : MonoBehaviour
     public TextMeshProUGUI damageCostText;
     public UnityEngine.UI.Button damageUpgradeButton;
 
+    [Header("Player Element")]
+    public TMP_Dropdown elementDropdown;
+
     [Header("HP UI")]
     public TextMeshProUGUI hpValueText;
     public TextMeshProUGUI hpNextText;
@@ -24,6 +27,10 @@ public class CharacterUpgradePanel : MonoBehaviour
     void OnEnable()
     {
         PlayerProfile.OnProfileLoaded += HandleProfileLoaded;
+        if (PlayerProfile.Instance != null && PlayerProfile.Instance.IsLoaded)
+        {
+            elementDropdown.value = (int)PlayerProfile.Instance.elementalType;
+        }
         TryRefreshUI();
     }
 
@@ -84,6 +91,23 @@ public class CharacterUpgradePanel : MonoBehaviour
         fireRateCostText.text = frCost.ToString();
 
         fireRateUpgradeButton.interactable = profile.coins >= frCost;
+    }
+
+    // ===== Element Dropdown Hook =====
+
+    public void ChangeElement(int index)
+    {
+        AudioManager.Instance.PlayClick();
+
+        var profile = PlayerProfile.Instance;
+
+        // Converts the 0, 1, 2 index directly to Physical, Fire, Energy
+        profile.elementalType = (ElementalType)index; 
+
+        // Save immediately so the choice persists
+        profile.SaveToDisk(); 
+
+        Debug.Log("Element updated to: " + profile.elementalType);
     }
 
     // ===== Button Hooks =====
