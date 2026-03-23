@@ -147,11 +147,13 @@ public class LaserTurretBrain : MonoBehaviour
         {
             if (PauseManager.IsPaused)
             {
-                AudioManager.Instance.PlayLaserLoop(false);
+                // AudioManager.Instance.PlayLaserLoop(false);
+                AudioManager.Instance.PauseLaser(true);
                 yield return null;
                 continue;
             }
-            AudioManager.Instance.PlayLaserLoop(true);
+            // AudioManager.Instance.PlayLaserLoop(true);
+            AudioManager.Instance.PauseLaser(false);
 
             timer += Time.deltaTime;
 
@@ -276,6 +278,14 @@ public class LaserTurretBrain : MonoBehaviour
 
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
+    }
+
+    private void OnDisable()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayLaserLoop(false);
+        }
     }
 
 }
