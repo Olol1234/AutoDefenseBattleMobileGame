@@ -126,6 +126,8 @@ public class HomingMissileBrain : MonoBehaviour
                 missilePrefab, firePoint.position, rot
             );
 
+            AudioManager.Instance.PlayHomingMissile();
+
             if (missileObj != null)
             {
                 HomingMissile missile = missileObj.GetComponent<HomingMissile>();
