@@ -202,6 +202,8 @@ public class LevelManager : MonoBehaviour
         if (stageEnded) return;
         stageEnded = true;
 
+        AudioManager.Instance.PlayStageLose();
+
         Debug.Log("STAGE LOST!");
         Time.timeScale = 0f;
         AudioManager.Instance.StopAllLoopingSounds();
@@ -224,6 +226,8 @@ public class LevelManager : MonoBehaviour
         {
             PlayerProfile.Instance.highestStageCleared = stage;
         }
+
+        AudioManager.Instance.PlayStageWin();
 
         Debug.Log("STAGE CLEARED!");
         Time.timeScale = 0f;
