@@ -21,6 +21,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip shotgunShootSound;
     // public AudioClip laserShootSound;
 
+    [Header("Stage Win/Lose Music")]
+    [SerializeField] private AudioSource stageResultMusicSource;
+    public AudioClip stageWinMusic;
+    public AudioClip stageLoseMusic;
+
     [Header("Looping Sources")]
     [SerializeField] private AudioSource laserLoopSource;
 
@@ -83,6 +88,20 @@ public class AudioManager : MonoBehaviour
     public void PlayCancel()
     {
         sfxSource.PlayOneShot(cancelSound);
+    }
+
+    public void PlayStageWin()
+    {
+        stageResultMusicSource.clip = stageWinMusic;
+        stageResultMusicSource.loop = false;
+        stageResultMusicSource.Play();
+    }
+
+    public void PlayStageLose()
+    {
+        stageResultMusicSource.clip = stageLoseMusic;
+        stageResultMusicSource.loop = false;
+        stageResultMusicSource.Play();
     }
 
     public void PlayPlayerShoot()
