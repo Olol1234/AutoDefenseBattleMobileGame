@@ -11,7 +11,7 @@ public class PlayerShoot : MonoBehaviour
     // private float fireRate = PlayerStats.Instance.GetAttackSpeed();
     private float nextFireTime = 0f;
     private float fireTimer = 0f;
-    private ElementalType currentElement = PlayerProfile.Instance.elementalType;
+    // private ElementalType currentElement;
 
     void Update()
     {
@@ -103,7 +103,7 @@ public class PlayerShoot : MonoBehaviour
                 if (proj != null)
                 {
                     // proj.Initialize(ElementalType.Physical, PlayerStats.Instance.GetDamage());
-                    proj.Initialize(currentElement, PlayerStats.Instance.GetDamage());
+                    proj.Initialize(PlayerProfile.Instance.elementalType, PlayerStats.Instance.GetDamage());
                 }
                 Rigidbody2D rb = pooledBullet.GetComponent<Rigidbody2D>();
                 if (rb != null)
