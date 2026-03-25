@@ -34,6 +34,10 @@ public class UpgradeData
                 stats.penetration += 1;
                 break;
 
+            case UpgradeType.AttackSpeedLow:
+                stats.attackSpeedMultiplier *= 1.20f;
+                break;
+
             case UpgradeType.AttackSpeed:
                 stats.attackSpeedMultiplier *= 1.5f;
                 break;
