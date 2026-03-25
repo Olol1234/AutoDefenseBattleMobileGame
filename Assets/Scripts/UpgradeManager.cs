@@ -55,10 +55,17 @@ public class UpgradeManager : MonoBehaviour
         ));
 
         allUpgrades.Add(new UpgradeData(
+            UpgradeType.AttackSpeedLow,
+            "+20% Attack Speed",
+            "Shoot faster",
+            UpgradeRarity.Uncommon
+        ));
+
+        allUpgrades.Add(new UpgradeData(
             UpgradeType.AttackSpeed,
             "+50% Attack Speed",
             "Shoot faster",
-            UpgradeRarity.Uncommon
+            UpgradeRarity.Rare
         ));
 
         allUpgrades.Add(new UpgradeData(
@@ -100,7 +107,7 @@ public class UpgradeManager : MonoBehaviour
             UpgradeType.HomingMissileTurretShockwaveOnImpact,
             "Shockwave on Impact",
             "Homing Missiles create a shockwave upon impact, damaging nearby enemies",
-            UpgradeRarity.Rare
+            UpgradeRarity.Epic
         ));
 
         allUpgrades.Add(new UpgradeData(
