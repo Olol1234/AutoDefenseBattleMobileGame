@@ -6,8 +6,9 @@ public class PlayerData
 
     // PLAYER DATA
     public float baseDamage = 20f;
-    public float baseFortressMaxHP = 100f;
-    public float baseFireRate = 1f;
+    public float baseFortressMaxHP = 500f;
+    public float baseFireRate = 2f;
+    public int fireRateLevel = 1;
     public ElementalType elementalType = ElementalType.Physical;
 
     // HOMING MISSILE TURRET DATA
