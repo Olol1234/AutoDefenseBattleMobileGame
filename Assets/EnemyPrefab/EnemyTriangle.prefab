@@ -136,12 +136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910874c3a9b855a40903d3cac1e350fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 15
+  baseHealth: 29
   expReward: 28
   myPrefab: {fileID: 0}
-  weakness: 
+  weakness: 01000000
   resistance: 
-  immunity: 
+  immunity: 02000000
 --- !u!114 &7874001362998410116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,10 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalSpeed: 0.9
-  horizontalSpeed: 1
+  horizontalSpeed: 0.8
   rotationSpeed: 20
   leanAngle: 15
-  knockbackResist: 1
+  knockbackResist: 4
 --- !u!114 &8963621230900292790
 MonoBehaviour:
   m_ObjectHideFlags: 0

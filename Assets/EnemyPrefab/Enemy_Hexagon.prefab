@@ -136,10 +136,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 57
-  expReward: 30
+  expReward: 33
   myPrefab: {fileID: 0}
-  weakness: 
-  resistance: 
+  weakness: 00000000
+  resistance: 02000000
   immunity: 
 --- !u!114 &1924339848630719671
 MonoBehaviour:
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.7
   stopDistanceOffset: 1.75
-  knockbackResist: 4
+  knockbackResist: 5
   damage: 1
   attackCooldown: 2.4
   lungeDistance: 0.45

@@ -136,11 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910874c3a9b855a40903d3cac1e350fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 2000
+  baseHealth: 47
   expReward: 30
   myPrefab: {fileID: 0}
-  weakness: 
-  resistance: 
+  weakness: 01000000
+  resistance: 00000000
   immunity: 
 --- !u!114 &5366451769927825670
 MonoBehaviour:
@@ -154,9 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a4004be1655b24eb0e36983c9c9c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.8
   stopDistanceOffset: 3.5
-  knockbackResist: 1
+  knockbackResist: 4
   projectilePrefab: {fileID: 1457727665348219276, guid: 51572153cb15d034c8fb7b8d16f951c2, type: 3}
   fireRate: 2
   damage: 10

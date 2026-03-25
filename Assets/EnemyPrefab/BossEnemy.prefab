@@ -53,7 +53,7 @@ MonoBehaviour:
   expReward: 60
   myPrefab: {fileID: 0}
   weakness: 
-  resistance: 
+  resistance: 000000000100000002000000
   immunity: 
 --- !u!114 &2258976744672383529
 MonoBehaviour:
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   stopDistance: 0.05
-  knockbackResist: 5
+  knockbackResist: 6
 --- !u!114 &1728605538631220612
 MonoBehaviour:
   m_ObjectHideFlags: 0

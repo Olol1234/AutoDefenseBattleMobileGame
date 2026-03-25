@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910874c3a9b855a40903d3cac1e350fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 50
+  baseHealth: 40
   expReward: 25
   myPrefab: {fileID: 0}
-  weakness: 
+  weakness: 02000000
   resistance: 
-  immunity: 00000000
+  immunity: 
 --- !u!114 &7195163942560567752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.4
   stopDistance: 0.05
-  knockbackResist: 4
+  knockbackResist: 5
 --- !u!114 &5159659820462428197
 MonoBehaviour:
   m_ObjectHideFlags: 0

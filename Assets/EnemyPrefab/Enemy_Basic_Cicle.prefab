@@ -49,11 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910874c3a9b855a40903d3cac1e350fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 40
+  baseHealth: 55
   expReward: 38
   myPrefab: {fileID: 0}
-  weakness: 
-  resistance: 
+  weakness: 02000000
+  resistance: 00000000
   immunity: 
 --- !u!114 &7195163942560567752
 MonoBehaviour:

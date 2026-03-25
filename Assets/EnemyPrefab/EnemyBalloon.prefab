@@ -136,10 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910874c3a9b855a40903d3cac1e350fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 180
+  baseHealth: 70
   expReward: 30
   myPrefab: {fileID: 0}
-  weakness: 
+  weakness: 000000000100000002000000
   resistance: 
   immunity: 
 --- !u!114 &6992227779656014636
