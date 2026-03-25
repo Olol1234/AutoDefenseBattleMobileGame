@@ -3,6 +3,7 @@ public enum UpgradeType
     DamagePercent,
     ExtraBullet,
     Penetration,
+    AttackSpeedLow,
     AttackSpeed,
     Knockback,
     HomingMissileTurret,
