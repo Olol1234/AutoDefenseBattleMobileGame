@@ -156,7 +156,7 @@ public class LevelManager : MonoBehaviour
         if (EnemySpawner.Instance.activeEnemyCount <= 0)
             EndStageWin();
 
-        Debug.Log("All enemies cleared. Stage complete.");
+        // Debug.Log("All enemies cleared. Stage complete.");
     }
 
     public void ForceEndStageLose()
@@ -169,11 +169,11 @@ public class LevelManager : MonoBehaviour
 
     public int CalculateCoins(bool won)
     {
-        int baseReward = won ? 50 : 20;
+        int baseReward = won ? 300 : 100;
         int timeBonus = Mathf.FloorToInt(elapsedTime * 0.1f);
 
         int stage = currentStage;
-        float stageMultiplier = 1f + (stage - 1) * 0.5f;
+        float stageMultiplier = 1f + (stage - 1) * 1.5f;
 
         return Mathf.RoundToInt((baseReward + timeBonus) * stageMultiplier);
     }
@@ -190,7 +190,7 @@ public class LevelManager : MonoBehaviour
         {
             profile.laserTurretUnlocked = true;
         }
-        else if (profile.highestStageCleared >= 1)
+        else if (profile.highestStageCleared >= 4)
         {
             profile.shotgunTurretUnlocked = true;
         }
