@@ -40,6 +40,10 @@ public class UpgradeData
 
             case UpgradeType.Knockback:
                 stats.knockbackLevel += 1;
+                if (stats.knockbackLevel == 2)
+                {
+                    UpgradeManager.Instance.MarkUpgradeTaken(UpgradeType.Knockback);
+                }
                 break;
 
             case UpgradeType.HomingMissileTurret:
