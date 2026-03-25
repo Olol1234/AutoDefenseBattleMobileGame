@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class CharacterUpgradePanel : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class CharacterUpgradePanel : MonoBehaviour
     public TextMeshProUGUI fireRateNextText;
     public TextMeshProUGUI fireRateCostText;
     public UnityEngine.UI.Button fireRateUpgradeButton;
+
+    [Header("Max Upgrade Panel")]
+    public GameObject maxUpgradePanel;
 
     void OnEnable()
     {
@@ -66,7 +70,7 @@ public class CharacterUpgradePanel : MonoBehaviour
 
         // DAMAGE
         float dmg = profile.baseDamage;
-        float dmgInc = 2f;
+        float dmgInc = 10f;
         int dmgCost = GetDamageUpgradeCost();
 
         damageValueText.text = dmg.ToString("0");
@@ -77,7 +81,7 @@ public class CharacterUpgradePanel : MonoBehaviour
 
         // HP
         float hp = profile.baseFortressMaxHP;
-        float hpInc = 10f;
+        float hpInc = 500f;
         int hpCost = GetHPUpgradeCost();
 
         hpValueText.text = hp.ToString("0");
@@ -92,7 +96,7 @@ public class CharacterUpgradePanel : MonoBehaviour
         int frCost = GetFireRateUpgradeCost();
 
         fireRateValueText.text = fr.ToString("0.0");
-        fireRateNextText.text = (fr + frInc).ToString("0.0");
+        fireRateNextText.text = (fr - frInc).ToString("0.0");
         fireRateCostText.text = frCost.ToString();
 
         fireRateUpgradeButton.interactable = profile.coins >= frCost;
@@ -127,7 +131,7 @@ public class CharacterUpgradePanel : MonoBehaviour
         if (profile.coins < cost) return;
 
         profile.coins -= cost;
-        profile.baseDamage += 2f;
+        profile.baseDamage += 10f;
         profile.SaveToDisk();
 
         PlayerProfile.OnProfileLoaded?.Invoke();
@@ -145,7 +149,7 @@ public class CharacterUpgradePanel : MonoBehaviour
         if (profile.coins < cost) return;
 
         profile.coins -= cost;
-        profile.baseFortressMaxHP += 10f;
+        profile.baseFortressMaxHP += 500f;
         profile.SaveToDisk();
 
         PlayerProfile.OnProfileLoaded?.Invoke();
@@ -155,6 +159,12 @@ public class CharacterUpgradePanel : MonoBehaviour
 
     public void UpgradeFireRate()
     {
+        if (PlayerProfile.Instance.fireRateLevel >= 41)
+        {
+            StartCoroutine(ShowMaxUpgradePanelRoutine());
+            return;
+        }
+
         AudioManager.Instance.PlayClick();
         
         int cost = GetFireRateUpgradeCost();
@@ -163,7 +173,8 @@ public class CharacterUpgradePanel : MonoBehaviour
         if (profile.coins < cost) return;
 
         profile.coins -= cost;
-        profile.baseFireRate += 0.1f;
+        profile.baseFireRate -= 0.05f;
+        profile.fireRateLevel++;
         profile.SaveToDisk();
 
         PlayerProfile.OnProfileLoaded?.Invoke();
@@ -188,6 +199,16 @@ public class CharacterUpgradePanel : MonoBehaviour
     int GetFireRateUpgradeCost()
     {
         float fr = PlayerProfile.Instance.baseFireRate;
-        return Mathf.RoundToInt(120 + fr * 100f);
+        // return Mathf.RoundToInt(120 + fr * 100f);
+        return Mathf.RoundToInt(120 + 1 * Mathf.Pow(1.3f, PlayerProfile.Instance.fireRateLevel - 1));
+    }
+
+    private IEnumerator ShowMaxUpgradePanelRoutine()
+    {
+        maxUpgradePanel.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        maxUpgradePanel.SetActive(false);
     }
 }
