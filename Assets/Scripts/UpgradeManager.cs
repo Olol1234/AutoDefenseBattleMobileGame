@@ -19,16 +19,16 @@ public class UpgradeManager : MonoBehaviour
     {
         float roll = Random.Range(0f, 1f);
 
-        if (roll < 0.5f)
-            return UpgradeRarity.Common;
-        else if (roll < 0.8f)
-            return UpgradeRarity.Uncommon;
+        if (roll < 0.60f)
+            return UpgradeRarity.Common;        // 60%
+        else if (roll < 0.85f)  
+            return UpgradeRarity.Uncommon;      // 25%
         else if (roll < 0.95f)
-            return UpgradeRarity.Rare;
+            return UpgradeRarity.Rare;          // 10%
         else if (roll < 0.99f)
-            return UpgradeRarity.Epic;
+            return UpgradeRarity.Epic;          // 4%
         else
-            return UpgradeRarity.Legendary;
+            return UpgradeRarity.Legendary;     // 1%
     }
 
     void InitUpgrades()
