@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
     public UnityEngine.UI.Button prevButton;
     public UnityEngine.UI.Button nextButton;
 
-    public int maxUnlockedStage = 1;   // Later load from save
+    public int maxUnlockedStage;   // Later load from save
     public StageData[] stages;
 
 
@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
     {
         AudioManager.Instance.PlayMenuMusic();
         selectedStage = PlayerPrefs.GetInt("SelectedStage", 1);
-        maxUnlockedStage = PlayerPrefs.GetInt("MaxUnlockedStage", 1);
+        maxUnlockedStage = PlayerPrefs.GetInt("HighestStageUnlocked", 1);
         UpdateUI();
     }
 
@@ -64,7 +64,7 @@ public class MainMenu : MonoBehaviour
         AudioManager.Instance.PlayClick();
         // Save selected stage
         PlayerPrefs.SetInt("SelectedStage", selectedStage);
-        if (selectedStage > maxUnlockedStage)
+        if (selectedStage > maxUnlockedStage+1)
         {
             // Debug.LogWarning("Selected stage is locked! This should not happen.");
             StartCoroutine(ShowClearPreviousStageErrorPanelRoutine());
