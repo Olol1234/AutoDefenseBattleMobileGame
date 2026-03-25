@@ -61,8 +61,6 @@ public static class TurretUpgradeHelper
         if (p.coins < cost)
             return false;
 
-        p.coins -= cost;
-
         switch (type)
         {
             case TurretType.HomingMissileTurret:
@@ -87,6 +85,8 @@ public static class TurretUpgradeHelper
                 break;
         }
 
+        p.coins -= cost;
+
         p.SaveToDisk();
         return true;
     }
@@ -100,31 +100,31 @@ public static class TurretUpgradeHelper
         if (p.coins < cost)
             return false;
 
-        p.coins -= cost;
-
         switch (type)
         {
             case TurretType.HomingMissileTurret:
-                if (p.homingMissileTurretCooldownLevel >= 50)
+                if (p.homingMissileTurretCooldownLevel >= 30)
                     return false;
                 p.homingMissileTurretCooldownLevel++;
                 p.homingMissileTurretCooldown *= 0.95f; // 5% faster
                 break;
 
             case TurretType.LaserTurret:
-                if (p.laserTurretCooldownLevel >= 50)
+                if (p.laserTurretCooldownLevel >= 30)
                     return false;
                 p.laserTurretCooldownLevel++;
                 p.laserTurretCooldown *= 0.95f; // 5% faster
                 break;
 
             case TurretType.ShotgunTurret:
-                if (p.shotgunTurretCooldownLevel >= 50)
+                if (p.shotgunTurretCooldownLevel >= 30)
                     return false;
                 p.shotgunTurretCooldownLevel++;
                 p.shotgunTurretCooldown *= 0.95f; // 5% faster
                 break;
         }
+
+        p.coins -= cost;
 
         p.SaveToDisk();
         return true;
@@ -137,10 +137,10 @@ public static class TurretUpgradeHelper
         switch (type)
         {
             case TurretType.HomingMissileTurret:
-                return p.homingMissileTurretBaseDamage + 100f;
+                return p.homingMissileTurretBaseDamage + 150f;
 
             case TurretType.LaserTurret:
-                return p.laserTurretBaseDPS + 40f;
+                return p.laserTurretBaseDPS + 70f;
                 
             case TurretType.ShotgunTurret:
                 return p.shotgunTurretBaseDamage + 400f;
