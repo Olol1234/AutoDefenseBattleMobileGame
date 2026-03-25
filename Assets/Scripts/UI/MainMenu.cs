@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
 
 [System.Serializable]
 public class StageData
@@ -16,8 +17,7 @@ public class MainMenu : MonoBehaviour
     public int selectedStage = 1;
     public TMP_Text stageText;
     public UnityEngine.UI.Image stageImage;
-    // later if needed
-    // public TMP_Text stageDescriptionText;
+    public GameObject errorMessagePanel;
 
     public UnityEngine.UI.Button prevButton;
     public UnityEngine.UI.Button nextButton;
@@ -30,6 +30,7 @@ public class MainMenu : MonoBehaviour
     {
         AudioManager.Instance.PlayMenuMusic();
         selectedStage = PlayerPrefs.GetInt("SelectedStage", 1);
+        maxUnlockedStage = PlayerPrefs.GetInt("MaxUnlockedStage", 1);
         UpdateUI();
     }
 
@@ -55,7 +56,7 @@ public class MainMenu : MonoBehaviour
 
         // Next button (locked logic)
         if (nextButton != null)
-            nextButton.interactable = selectedStage < maxUnlockedStage;
+            nextButton.interactable = selectedStage < 10;
         }
 
     public void PlayStage()
@@ -63,6 +64,12 @@ public class MainMenu : MonoBehaviour
         AudioManager.Instance.PlayClick();
         // Save selected stage
         PlayerPrefs.SetInt("SelectedStage", selectedStage);
+        if (selectedStage > maxUnlockedStage)
+        {
+            // Debug.LogWarning("Selected stage is locked! This should not happen.");
+            StartCoroutine(ShowClearPreviousStageErrorPanelRoutine());
+            return;
+        }
 
         // Load gameplay scene
         SceneManager.LoadScene("MainScene");
@@ -70,7 +77,7 @@ public class MainMenu : MonoBehaviour
 
     public void NextStage()
     {
-        if (selectedStage < maxUnlockedStage)
+        if (selectedStage < 11)
         {
             selectedStage++;
             UpdateUI();
@@ -86,5 +93,14 @@ public class MainMenu : MonoBehaviour
             UpdateUI();
         }
         AudioManager.Instance.PlayClick();
+    }
+
+    private IEnumerator ShowClearPreviousStageErrorPanelRoutine()
+    {
+        errorMessagePanel.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        errorMessagePanel.SetActive(false);
     }
 }
