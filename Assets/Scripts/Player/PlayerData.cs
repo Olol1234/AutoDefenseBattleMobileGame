@@ -3,6 +3,7 @@ public class PlayerData
 {
     public int coins = 0;
     public int highestStageCleared = 0;
+    public float masterVolume = 0.5f;
 
     // PLAYER DATA
     public float baseDamage = 20f;

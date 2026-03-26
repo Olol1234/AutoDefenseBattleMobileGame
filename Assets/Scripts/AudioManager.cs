@@ -40,8 +40,10 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            float savedVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
-            sfxSource.volume = savedVolume;
+            float savedVolume = PlayerProfile.Instance.masterVolume;
+            // Apply to everything immediately
+            // SetVolume(savedVolume); 
+            ApplyVolumeToAllSources(savedVolume);
         }
         else
         {
@@ -72,12 +74,25 @@ public class AudioManager : MonoBehaviour
         // Add any other looping sources in the future
     }
 
+    private void ApplyVolumeToAllSources(float volume)
+    {
+        sfxSource.volume = volume;
+        musicSource.volume = volume;
+        stageResultMusicSource.volume = volume;
+        laserLoopSource.volume = volume;
+    }
+
     public void SetVolume(float volume)
     {
-        sfxSource.volume = volume; 
+        ApplyVolumeToAllSources(volume);
         
-        // Save it so the game remembers next time
+        if (PlayerProfile.Instance != null)
+        {
+            PlayerProfile.Instance.masterVolume = volume;
+        }
+
         PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.Save();
     }
 
     public void PlayClick()

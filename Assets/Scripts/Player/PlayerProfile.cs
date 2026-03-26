@@ -7,6 +7,7 @@ public class PlayerProfile : MonoBehaviour
 
     public int coins;
     public int highestStageCleared;
+    public float masterVolume;
     // Base stats for player
     public float baseDamage;
     public float baseFortressMaxHP;
@@ -68,6 +69,7 @@ public class PlayerProfile : MonoBehaviour
 
         coins = data.coins;
         highestStageCleared = data.highestStageCleared;
+        masterVolume = data.masterVolume;
         // PLAYER DATA
         baseDamage = data.baseDamage;
         baseFortressMaxHP = data.baseFortressMaxHP;
@@ -108,6 +110,7 @@ public class PlayerProfile : MonoBehaviour
 
         data.coins = coins;
         data.highestStageCleared = highestStageCleared;
+        data.masterVolume = masterVolume;
         // PLAYER DATA
         data.baseDamage = baseDamage;
         data.baseFortressMaxHP = baseFortressMaxHP;
