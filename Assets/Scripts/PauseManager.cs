@@ -8,6 +8,7 @@ public class PauseManager : MonoBehaviour
     public static bool IsSystemPaused = false;
 
     public GameObject pausePanel;
+    public GameObject settingPanel;
 
     private float previousGameSpeed;
 
@@ -60,6 +61,12 @@ public class PauseManager : MonoBehaviour
         //     pausePanel.SetActive(true);
         GameInput.GameplayEnabled = false;
         // if (pausePanel != null) pausePanel.SetActive(true);
+    }
+
+    public void OpenSettings()
+    {
+        if (settingPanel != null)
+            settingPanel.SetActive(true);
     }
 
     public void Resume()
