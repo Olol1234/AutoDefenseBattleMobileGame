@@ -6277,8 +6277,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 1675278923246743948, guid: 812b83bcc753996419e8ceaf61489688, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -15734,31 +15734,31 @@ MonoBehaviour:
     stageSprite: {fileID: -3952906388009851560, guid: c8bc1ed9d0968d542a02219f018fad5a, type: 3}
     description: 
   - stageNumber: 2
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: 5830694933855508796, guid: 2aa3abe6303281e45a63546f79476e0c, type: 3}
     description: 
   - stageNumber: 3
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: 2093634458619109767, guid: dcdc2f4b84e93b94aa8726d7c423a25a, type: 3}
     description: 
   - stageNumber: 4
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: -8438142084198232075, guid: 3c9e44bc5bfc2bb48b3f946521467869, type: 3}
     description: 
   - stageNumber: 5
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: -1202746278241389971, guid: f26ecdf483dc4f94895644577e600f8f, type: 3}
     description: 
   - stageNumber: 6
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: 2476580274048045573, guid: 1ae84474ebf02d64e9bd14eb84046068, type: 3}
     description: 
   - stageNumber: 7
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: 505262977, guid: 70590323e09e3c043a07b4723c2fb8cc, type: 3}
     description: 
   - stageNumber: 8
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: 4165437456155503910, guid: 9bc8ef6a5d80ab6439ac08a5e790128c, type: 3}
     description: 
   - stageNumber: 9
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: 3427114271967980436, guid: 13146ca8de5d61846a523244ce5794a2, type: 3}
     description: 
   - stageNumber: 10
-    stageSprite: {fileID: 0}
+    stageSprite: {fileID: -1222568999016665575, guid: 4889e4e213878c54ba48d93f60fc1bd7, type: 3}
     description: 
 --- !u!4 &1905817790
 Transform:
@@ -17248,7 +17248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Setting
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
